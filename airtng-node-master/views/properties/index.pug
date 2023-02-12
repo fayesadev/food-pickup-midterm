@@ -1,0 +1,16 @@
+extends ../layout
+
+block hero
+  .hero-text
+    h1 Lodging fit for a captain
+    p The Next Generation of vacation rentals.
+
+block content
+  p#notice
+  .container
+    .row
+      each property in properties
+        .col-md-4
+          a.property(href='/properties/' + property.id)
+            img(src=property.imageUrl)
+            h2= property.description
