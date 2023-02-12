@@ -1,0 +1,12 @@
+body {
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.new-order-request {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: red;
+}
