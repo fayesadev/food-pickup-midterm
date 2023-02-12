@@ -7,11 +7,45 @@
   <title>Restaurant - Home</title>
 </head>
 <body>
-  <section class="pending-requests">
-
-  </section>
-  <section class="restaurant-dashboard">
-    
-  </section>
+  <main>
+    <section class="pending-requests">
+      <section class="new-order-request">
+        <header>
+          <h3>Jane Doe</h3>
+          <h3>12:00pm</h3>
+        </header>
+        <ul>
+          <li>1x Beef Tacos</li>
+          <li>2x Guacamole & Chips</li>
+          <li>1x Fish Tacos</li>
+        </ul>
+        <label>Additional comments</label>
+        <p>No peanuts and medium spicy</p>
+        <form id="time-estimate" method="POST">
+          <label for="submit-time-estimate">How much time will this order take?</label>
+          <input name="submit-time-estimate" placeholder="Enter Time Estimate"></input>
+          <button type="submit">Confirm Request</button>
+        </form>
+      </section>
+    </section>
+    <section class="restaurant-dashboard">
+      <section class="current-order">
+        <header>
+          <h3>John Smith</h3>
+          <h3>11:30am</h3>
+        </header>
+        <ul>
+          <li>1x Salsa Verde</li>
+          <li>2x Guacamole & Chips</li>
+          <li>1x Beef Birria Tacos</li>
+        </ul>
+        <label>Additional comments</label>
+        <p>Include more hotsauce packets please</p>
+        <form id="completed-order" method="POST">
+          <button type="submit">Order Fulfilled!</button>
+        </form>
+      </section>
+    </section>
+  </main>
 </body>
 </html>
