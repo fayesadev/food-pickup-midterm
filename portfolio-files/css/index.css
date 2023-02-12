@@ -1,0 +1,84 @@
+nav {
+  top: 0;
+  width: 100%;
+  position: fixed;
+  font-weight: 600;
+  font-size: 1.5em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 1%;
+  height: 56px;
+  z-index: 100;
+  color: #fff;
+}
+
+.page-header {
+  width: 100%;
+  height: 33vh;
+  background-color: #4b4e4c;
+  font-size: 30px;
+  letter-spacing: 1px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home {
+  display: flex;
+  margin-left: 20px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+
+.meal {
+  padding: 8px;
+  font-size: 14.5px;
+  padding: 30px;
+}
+
+.meal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.addtocart {
+  display: block;
+  padding: 0.4rem;
+  border-radius: 3px;
+  border: none;
+  font-size: 8px;
+  position: relative;
+  background: #007B3E;
+  color: #fff;
+  cursor: pointer;
+}
+
+.fa-cart-plus {
+  background: #007B3E;
+}
+
+.meal-name {
+  font-size: 17px;
+}
+
+.price {
+  margin-top: 20px;
+  display: flex;
+}
+
+.cart {
+  margin-top: 0PX;
+  min-width: 25vw;
+  min-height: 100vh;
+  background-color: #F7F7F7;
+}
+
+.cart-total {
+  display: flex;
+}/*# sourceMappingURL=index.css.map */
