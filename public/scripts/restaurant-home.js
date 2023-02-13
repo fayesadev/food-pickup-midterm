@@ -1,11 +1,13 @@
 $(document).ready(function() {
 /**** Restaurant Orders ****/
+
   //Sample meal object
   // let mealObj = {
   //   'Roast Beef': 1,
   //   'Chicken Club': 2,
   //   'Philly Cheesesteak': 1
   // }
+  
   //Returns HTML markup of meal and quantity list passed in an object
   const mealList = function(mealObj) {
     let string = '';
@@ -35,8 +37,8 @@ $(document).ready(function() {
     customRequest: 'No peanuts pls'
   }
 
-  //Creates HTML markup of order passed in an object
-  const createOrder = function(orderObj) {
+  //Creates HTML markup of pending request with time estimate input form
+  const createOrderRequest = function(orderObj) {
     const name = orderObj.name;
     // const number = customer.phone_number;
     // const timeEstimate = order.est_completion_time;
@@ -65,7 +67,36 @@ $(document).ready(function() {
     return markup;
     }
 
-  console.log('createOrder', createOrder(sampleOrder));
+  // console.log('createOrder', createOrder(sampleOrder));
+
+  //Creates HTML markup of current order with order-fulfilled form button
+  const createCurrentOrder = function(orderObj) {
+    const name = orderObj.name;
+    // const number = customer.phone_number;
+    // const timeEstimate = order.est_completion_time;
+    const orderTime = orderObj.order_time;
+    const customRequest = escape(orderObj.customRequest);
+    const meals = mealList(orderObj.order);
+
+    const markup = `
+    <section class="current-order">
+        <header>
+          <h3>${name}</h3>
+          <h3>${orderTime}</h3>
+        </header>
+        <ul>
+          ${meals}
+        </ul>
+        <label>Additional comments</label>
+        <p>${customRequest}</p>
+        <form id="completed-order" method="POST">
+        <button type="submit">Order Fulfilled!</button>
+      </form>
+      </section>`
+
+    return markup;
+    }
+
 
 })
 
