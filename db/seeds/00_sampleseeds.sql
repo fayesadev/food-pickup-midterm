@@ -15,5 +15,7 @@ VALUES ('Roast Beef', 'https://media.gettyimages.com/id/154964016/photo/roast-be
 
 INSERT INTO order_meals (order_id, meal_id, meal_quantity)
 VALUES (1, 2, 1),
+(1, 1, 3),
+(1, 3, 2),
 (2, 1, 2),
 (3, 3, 1);
