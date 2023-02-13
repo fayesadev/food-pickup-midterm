@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <title>Users</title>
+
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" />
+    <link rel="stylesheet" href="/styles/main.css" />
+    <link rel="stylesheet" href="/styles/layout.css" />
+
+    <script src="/vendor/jquery-3.0.0.js"></script>
+    <script defer src="/scripts/order-tracking.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+
+  <body>
+    <nav>
+      <span id="logo">FoodHub</span>
+      <button class="home-button">Order Again</button>
+    </nav>
+    <header class="page-header">
+      <h2>Order Successful!</h2>
+    </header>
+    <div class="content">
+      <div id="initial-order">
+        <h3 class="pickup-alert">
+          The restaurant will confirm your estimated pick up time shortly...
+        </h3>
+        <div class="blob">
+          <i class="fa fa-clock-o"></i>
+        </div>
+      </div>
+      <div id="order-estimate" class="hidden">
+        <h3 id="pickup-alert"></h3>
+        <div
+          class="progress-bar"
+          data-label="Preparing your order..."
+          style="--width: 0"
+        ></div>
+      </div>
+      <div id="order-complete" class="hidden">
+        <h3 class="pickup-alert">
+          Your order is ready for pick up! Thank you for eating with Foodhub :)
+        </h3>
+      </div>
+    </div>
+
+    <button id="order-duration-button">Order Duration</button>
+    <button id="order-complete-button">Order Complete</button>
+  </body>
+
+</html>
