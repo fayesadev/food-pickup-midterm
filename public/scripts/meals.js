@@ -1,15 +1,14 @@
 const axios = require('axios');
 
-document.addEventListener("DOMContentLoaded", () => {
-  console.log("hi");
-  return loadMeals();
-});
+
 
 
 
 // GET MENU ITEMS: use axios for api get request
+document.addEventListener("DOMContentLoaded", loadMeals());
+
 const loadMeals = function() {
-  console.log('hi');
+  //console.log('hi');
   axios
     .get('https://free-food-menus-api-production.up.railway.app/sandwiches', {
       responseType: "json",
@@ -21,9 +20,9 @@ const loadMeals = function() {
 };
 
 
+// UPDATE MENU ITEMS: update ejs template
 
-
-
+// UPDATE DB
 
 
 
