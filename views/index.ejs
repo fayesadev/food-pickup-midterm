@@ -16,6 +16,8 @@
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/app.js"></script>
   <script src="https://kit.fontawesome.com/81d8ede405.js" crossorigin="anonymous"></script>
+
+  <script src="./scripts/meals.js" async></script>
 </head>
 
 <body>
@@ -98,24 +100,40 @@
       </div>
 
     </section>
-    <section class="cart">
-      <div>
-        <!--See cart.js for order items construction-->
+
+
+    <!--SHOPPING CART STARTS-->
+    <section class="cart-container">
+      <h2>Review order</h2>
+      <!--labels for order items-->
+      <div class="cart-row">
+        <span class="cart-col-1 cart-column">ITEM</span>
+        <span class="cart-col-2 cart-column">PRICE</span>
+        <span class="cart-col-3 cart-column" id="qty-header">QTY</span>
       </div>
+      <!--list of order items-->
+      <div class="cart-items">
+        <div class="cart-row">
+          <span class="cart-col-1 cart-column">Sandwich Name</span>
+          <span class="cart-col-2 cart-column">$19.99</span>
+          <div class="cart-col-3 cart-column">
+            <input class="cart-col-3-input" type="number" value="1">
+            <button class="btn btn-danger" type="button">x</button>
+          </div>
+        </div>
+      </div>
+      <!--totals-->
       <div class="cart-total">
-        <div><strong>Subtotal:</strong></div>
-        <div>$100.00</div>
+        <strong class="cart-total-title">Total</strong>
+        <span class="cart-total-price">$19.99</span>
       </div>
-      <div class="cart-total">
-        <div><strong>Total:</strong></div>
-        <div>$120.00</div>
-      </div>
-      <button>submit</button>
+      <!--submit order-->
+      <button class="btn btn-primary btn-purchase" type="button">Proceed to Checkout</button>
     </section>
+    <!--SHOPPING CART ENDS-->
 
   </main>
-
-  <script src="./scripts/meals.js"></script>
+  <script src="./scripts/cart.js"></script>
 
 </body>
 
