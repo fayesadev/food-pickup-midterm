@@ -1,3 +1,6 @@
+
+// Client facing scripts here
+
 // const axios = require('axios');
 
 // const getData = () => {
@@ -8,3 +11,4 @@
 // };
 
 // getData();
+
