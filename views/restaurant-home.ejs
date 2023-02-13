@@ -5,15 +5,23 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- App CSS -->
   <link rel="stylesheet" href="/styles/restaurant-home.css"/>
   <!-- <link rel="stylesheet" href="/styles/main.css" />
   <link rel="stylesheet" href="/styles/layout.css" /> -->
+
+  <!-- External JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+  <!-- App JS -->
+  <script type="text/javascript" src="/public/scripts/restaurant-home.js"></script>
+
 
   <title>Restaurant - Home</title>
 </head>
 <body>
   <main>
-    <section class="pending-requests">
+    <section id="pending-requests-container">
       <section class="new-order-request">
         <header>
           <h3>Andy Lindsay</h3>
@@ -33,7 +41,7 @@
         </form>
       </section>
     </section>
-    <section class="restaurant-dashboard">
+    <section id="current-orders-container">
       <section class="current-order">
         <header>
           <h3>Lauren Johnston</h3>

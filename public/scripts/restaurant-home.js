@@ -1,14 +1,9 @@
 $(document).ready(function() {
 /**** Restaurant Orders ****/
 
-  //Sample meal object
-  // let mealObj = {
-  //   'Roast Beef': 1,
-  //   'Chicken Club': 2,
-  //   'Philly Cheesesteak': 1
-  // }
-  
-  //Returns HTML markup of meal and quantity list passed in an object
+//////////// HELPER FUNCTIONS ///////////////
+
+//Returns HTML markup of meal and quantity list passed in an object
   const mealList = function(mealObj) {
     let string = '';
     for (let meal in mealObj) {
@@ -16,7 +11,13 @@ $(document).ready(function() {
     }
     return string;
   }
-  // console.log('mealList', mealList(mealObj));
+//Sample meal object
+// let mealObj = {
+//   'Roast Beef': 1,
+//   'Chicken Club': 2,
+//   'Philly Cheesesteak': 1
+// }
+// console.log('mealList', mealList(mealObj));
 
   //Encodes string to become safe HTML and prevent XSS
   const escape = function(str) {
@@ -25,20 +26,23 @@ $(document).ready(function() {
     return text.innerHTML;
   };
 
-  const sampleOrder = {
-    order: {
-      'Roast Beef': 1,
-      'Chicken Club': 2,
-      'Philly Cheesesteak': 1
-    },
-    name: 'Robbie',
-    number: 7801234567,
-    order_time: '1:15pm',
-    customRequest: 'No peanuts pls'
-  }
+//Sample order object
+  // const sampleOrder = {
+  //   order: {
+  //     'Roast Beef': 1,
+  //     'Chicken Club': 2,
+  //     'Philly Cheesesteak': 1
+  //   },
+  //   name: 'Robbie',
+  //   number: 7801234567,
+  //   order_time: '1:15pm',
+  //   customRequest: 'No peanuts pls'
+  // }
+
+//////////////// PENDING ORDER REQUESTS SIDE BAR ////////////////
 
   //Creates HTML markup of pending request with time estimate input form
-  const createOrderRequest = function(orderObj) {
+  const createRequestElement = function(orderObj) {
     const name = orderObj.name;
     // const number = customer.phone_number;
     // const timeEstimate = order.est_completion_time;
@@ -67,10 +71,20 @@ $(document).ready(function() {
     return markup;
     }
 
+  //Renders pending order request and appends to pending-requests-container
+  const renderRequest = function(orderRequests) {
+    for (let request of orderRequests) {
+      const $request = createRequestElement(request);
+      $('#pending-requests-container').append($request);
+    }
+  }
+
   // console.log('createOrder', createOrder(sampleOrder));
 
+ //////////////// CURRENT ORDER DASHBOARD ///////////////////////
+
   //Creates HTML markup of current order with order-fulfilled form button
-  const createCurrentOrder = function(orderObj) {
+  const createOrderElement = function(orderObj) {
     const name = orderObj.name;
     // const number = customer.phone_number;
     // const timeEstimate = order.est_completion_time;
@@ -97,7 +111,13 @@ $(document).ready(function() {
     return markup;
     }
 
-
+  //Renders current order request and appends to current-order-container
+  const renderOrder = function(currentOrder) {
+    for (let order of currentOrder) {
+      const $order = createOrderElement(order);
+      $('#current-orders-container').append($order);
+    }
+  }
 })
 
 
