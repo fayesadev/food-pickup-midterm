@@ -1,10 +1,20 @@
 $(document).ready(function() {
 /**** Restaurant Orders ****/
-
-  //Returns array of
-  const mealArr = function(mealObj) {
-    
+  //Sample meal object
+  // let mealObj = {
+  //   'Roast Beef': 1,
+  //   'Chicken Club': 2,
+  //   'Philly Cheesesteak': 1
+  // }
+  //Returns HTML markup of meal and quantity list passed in an object
+  const mealList = function(mealObj) {
+    let string = '';
+    for (let meal in mealObj) {
+      string += `<li>${mealObj[meal]}x ${meal}<li> \n`;
+    }
+    return string;
   }
+  // console.log('mealList', mealList(mealObj));
 
   //Encodes string to become safe HTML and prevent XSS
   const escape = function(str) {
@@ -13,15 +23,26 @@ $(document).ready(function() {
     return text.innerHTML;
   };
 
+  const sampleOrder = {
+    order: {
+      'Roast Beef': 1,
+      'Chicken Club': 2,
+      'Philly Cheesesteak': 1
+    },
+    name: 'Robbie',
+    number: 7801234567,
+    order_time: '1:15pm',
+    customRequest: 'No peanuts pls'
+  }
+
   //Creates HTML markup of order passed in an object
-  const createOrder = function(customer, order, meal, orderMeal) {
-    const name = customer.name;
+  const createOrder = function(orderObj) {
+    const name = orderObj.name;
     // const number = customer.phone_number;
     // const timeEstimate = order.est_completion_time;
-    const orderTime = order.order_time;
-    const comments = escape(order.special_instructions);
-    const mealName = meal.name;
-    const quantity = orderMeal.meal_quantity;
+    const orderTime = orderObj.order_time;
+    const customRequest = escape(orderObj.customRequest);
+    const meals = mealList(orderObj.order);
 
     const markup = `
     <section class="new-order-request">
@@ -30,12 +51,10 @@ $(document).ready(function() {
           <h3>${orderTime}</h3>
         </header>
         <ul>
-          <li>1x Beef Tacos</li>
-          <li>2x Guacamole & Chips</li>
-          <li>1x Fish Tacos</li>
+          ${meals}
         </ul>
         <label>Additional comments</label>
-        <p>${comments}</p>
+        <p>${customRequest}</p>
         <form id="time-estimate" method="POST">
           <label for="submit-time-estimate">How much time will this order take?</label>
           <input name="submit-time-estimate" placeholder="Enter Time Estimate"></input>
@@ -46,14 +65,7 @@ $(document).ready(function() {
     return markup;
     }
 
-//     <script>
-//   let array = ['item 1', 'item 2', 'item 3', 'item 4', 'item 5'];
-//   for (let i = 0; i < array.length; i++){
-//     let list = document.createElement('li');
-//     list.innerText=array[i];
-//     document.querySelector('#box').appendChild(list);
-//   }
-//  </script>
+  console.log('createOrder', createOrder(sampleOrder));
 
 })
 
