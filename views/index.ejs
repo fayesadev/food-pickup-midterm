@@ -16,6 +16,8 @@
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/meals.js"></script>
   <script src="https://kit.fontawesome.com/81d8ede405.js" crossorigin="anonymous"></script>
+
+
 </head>
 
 <body>
@@ -38,84 +40,73 @@
   <main class="home">
     <section id="menu-container">
       <!--See meals.js for template literal-->
-      <div class="grid-container">
-        <article class="meal">
-          <header>
-            <img class="meal-image" src="">
-            <div class="meal-name"><strong>Dish Name</strong></div>
-            <div class="meal-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem provident aliquam
-              laudantium eveniet consequatur laborum, dolore quae tempora soluta doloribus odit nobis necessitatibus
-              repudiandae natus blanditiis sequi cumque! Nihil, laboriosam?</div>
-          </header>
-          <footer class="meal-footer">
-            <div class="price">
-              <div><strong>Price:</strong></div>
-              <div>$29.99</div>
-            </div>
-            <button class="addtocart">
-              <div><i class="fas fa-cart-plus"></i> ADD TO CART</div>
-            </button>
-          </footer>
-        </article>
+      <h2 class="food-category">Briskets</h2>
+      <div class="grid-container" id="our-foods"></div>
 
-        <article class="meal">
-          <header>
-            <img class="meal-image" src="">
-            <div class="meal-name"><strong>Dish Name</strong></div>
-            <div class="meal-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem provident aliquam
-              laudantium eveniet consequatur laborum, dolore quae tempora soluta doloribus odit nobis necessitatibus
-              repudiandae natus blanditiis sequi cumque! Nihil, laboriosam?</div>
-          </header>
-          <footer class="meal-footer">
-            <div class="price">
-              <div><strong>Price:</strong></div>
-              <div>$29.99</div>
-            </div>
-            <button class="addtocart">
-              <div><i class="fas fa-cart-plus"></i> ADD TO CART</div>
-            </button>
-          </footer>
-        </article>
+      <h2 class="food-category">Fried Chicken</h2>
+      <div class="grid-container" id="fried-chicken"></div>
 
-        <article class="meal">
-          <header>
-            <img class="meal-image" src="">
-            <div class="meal-name"><strong>Dish Name</strong></div>
-            <div class="meal-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem provident aliquam
-              laudantium eveniet consequatur laborum, dolore quae tempora soluta doloribus odit nobis necessitatibus
-              repudiandae natus blanditiis sequi cumque! Nihil, laboriosam?</div>
-          </header>
-          <footer class="meal-footer">
-            <div class="price">
-              <div><strong>Price:</strong></div>
-              <div>$29.99</div>
-            </div>
-            <button class="addtocart">
-              <div><i class="fas fa-cart-plus"></i> ADD TO CART</div>
-            </button>
-          </footer>
-        </article>
-      </div>
-
+      <h2 class="food-category">Sandwiches</h2>
+      <div class="grid-container" id="sandwiches"></div>
     </section>
-    <section class="cart">
+
+
+    <!--SHOPPING CART STARTS-->
+    <section class="cart-container">
+      <h2>Review order</h2>
+      <!--labels for order items-->
+      <div class="cart-row">
+        <span class="cart-col-1 cart-column">ITEM</span>
+        <span class="cart-col-2 cart-column">PRICE</span>
+        <span class="cart-col-3 cart-column" id="qty-header">QTY</span>
+      </div>
+      <!--list of order items-->
+      <article class="cart-items">
+
+
+        <!--totals-->
+        <div class="cart-total">
+          <strong class="cart-total-title">Total</strong>
+          <span class="cart-total-price">$0.00</span>
+        </div>
+        <!--submit order-->
+        <button class="btn btn-purchase btn-checkout" type="button">Proceed to Checkout</button>
+    </section>
+    <!--SHOPPING CART ENDS-->
+
+    <!--Confirm order form starts-->
+    <form id="confirmation-form" class="order-form" method="post" action="contact-form-process.php">
+      <div class="form-header"><h2>Confirm Details for Pickup</h2></div>
       <div>
-        <!--See cart.js for order items construction-->
+        <label for="Name" class="order-label">Your name</label>
+        <div class="order-input-group">
+          <input type="text" id="Name" name="Name" class="order-input" placeholder="Jane Smith"required>
+        </div>
       </div>
-      <div class="cart-total">
-        <div><strong>Subtotal:</strong></div>
-        <div>$100.00</div>
+
+      <div>
+        <label for="tel" class="order-label">Your phone number</label>
+        <div class="order-input-group">
+          <input type="tel" id="tel" name="tel" class="order-input" placeholder="+1-555-5555" required>
+        </div>
       </div>
-      <div class="cart-total">
-        <div><strong>Total:</strong></div>
-        <div>$120.00</div>
+
+      <div>
+        <label for="Message" class="order-label">Special Instructions:</label>
+        <div class="order-input-group">
+          <textarea id="Message" name="Message" class="order-input" rows="6" maxlength="1000" placeholder="Allergies, dellivery instructions, etc."></textarea>
+        </div>
       </div>
-      <button>submit</button>
-    </section>
+
+      <div class="order-buttons">
+        <button type="button"  class="btn-purchase cancel">Cancel</button>
+        <button type="submit"  class="btn-purchase confirm">Confirm Order</button>
+      </div>
+    </form>
 
   </main>
-
   <script src="./scripts/meals.js"></script>
+  <script src="./scripts/cart.js"></script>
 
 </body>
 
