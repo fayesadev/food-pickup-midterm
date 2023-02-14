@@ -49,10 +49,6 @@ app.use('/restaurants', restaurantRoutes);
 //   res.render('index');
 // });
 
-// app.post('/requests', (req,res) => {
-//   console.log("req.body", req.body);
-//   res.redirect('/');
-// });
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
