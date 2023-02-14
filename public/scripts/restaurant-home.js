@@ -163,17 +163,25 @@
     })
   }
 
-$(document).ready(function () {
+$(document).ready(function (event) {
+  // event.preventDefault();
+  renderRequest(orders);
   renderOrder(orders);
+  // loadRequest();
+  // loadOrder();
 
   $('#dummybutton').click(function() {
     loadRequest();
-  });
-  $('#submitTime').click(function() {
-    loadOrder();
   })
-});
-
+    //   $.post('/restaurants/orders', $text)
+    //   .then(()=>{
+      // })
+  $('#timeEstimate').submit(function() {
+    $text = $(this).serialize();
+    alert('you submitted time!');
+    console.log("$text", $text)
+  });
+})
 // $('#time-estimate').submit(function(event) {
 //   event.preventDefault();
 //   const $text = $(this).serialize();

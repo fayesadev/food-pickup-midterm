@@ -61,7 +61,6 @@ router.get('/', (req, res) => {
 // })
 
 router.post('/orders', (req, res) => {
-
   const timeEstimate = req.body.timeEstimate;
 
   orders[1].timeEstimate = timeEstimate;
@@ -70,6 +69,9 @@ router.post('/orders', (req, res) => {
   res.redirect('/restaurants');
 });
 
+// router.get('/orders', (req, res) => {
+
+// });
 // router.get('*', (req, res) => {
 //   res.redirect('/restaurants');
 // })
