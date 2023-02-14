@@ -1,7 +1,5 @@
 $(document).ready(function() {
-/**** Restaurant Orders ****/
-
-//////////// HELPER FUNCTIONS ///////////////
+/***********  HELPER FUNCTIONS **********/
 
 //Returns HTML markup of meal and quantity list passed in an object
   const mealList = function(mealObj) {
@@ -10,14 +8,14 @@ $(document).ready(function() {
       string += `<li>${mealObj[meal]}x ${meal}<li> \n`;
     }
     return string;
+  };
+  /* Sample meal object
+  let mealObj = {
+    'Roast Beef': 1,
+    'Chicken Club': 2,
+    'Philly Cheesesteak': 1
   }
-//Sample meal object
-// let mealObj = {
-//   'Roast Beef': 1,
-//   'Chicken Club': 2,
-//   'Philly Cheesesteak': 1
-// }
-// console.log('mealList', mealList(mealObj));
+  console.log('mealList', mealList(mealObj)); */
 
   //Encodes string to become safe HTML and prevent XSS
   const escape = function(str) {
@@ -26,20 +24,43 @@ $(document).ready(function() {
     return text.innerHTML;
   };
 
-//Sample order object
-  // const sampleOrder = {
-  //   order: {
-  //     'Roast Beef': 1,
-  //     'Chicken Club': 2,
-  //     'Philly Cheesesteak': 1
-  //   },
-  //   name: 'Robbie',
-  //   number: 7801234567,
-  //   order_time: '1:15pm',
-  //   customRequest: 'No peanuts pls'
-  // }
+  /*Sample order object*/
+  const sampleOrder = {
+    order: {
+      'Roast Beef': 1,
+      'Chicken Club': 2,
+      'Philly Cheesesteak': 1
+    },
+    name: 'Robbie',
+    number: 7801234567,
+    order_time: '1:15pm',
+    customRequest: 'No peanuts pls'
+  };
+  const orders = [
+    {
+      order: {
+        'Roast Beef': 1,
+        'Chicken Club': 2,
+        'Philly Cheesesteak': 1
+      },
+      name: 'Robbie',
+      number: 7801234567,
+      order_time: '1:15pm',
+      customRequest: 'No peanuts pls'
+    }, {
+      order: {
+        'Roast Beef': 1,
+        'Chicken Club': 2,
+        'Philly Cheesesteak': 1
+      },
+      name: 'Robbie',
+      number: 7801234567,
+      order_time: '1:15pm',
+      customRequest: 'No peanuts pls'
+    }
+  ]
 
-//////////////// PENDING ORDER REQUESTS SIDE BAR ////////////////
+/********** PENDING ORDER REQUESTS SIDE BAR **********/
 
   //Creates HTML markup of pending request with time estimate input form
   const createRequestElement = function(orderObj) {
@@ -66,22 +87,22 @@ $(document).ready(function() {
           <input name="submit-time-estimate" placeholder="Enter Time Estimate"></input>
           <button type="submit">Confirm Request</button>
         </form>
-      </section>`
+      </section>`;
 
     return markup;
-    }
+    };
 
   //Renders pending order request and appends to pending-requests-container
   const renderRequest = function(orderRequests) {
     for (let request of orderRequests) {
       const $request = createRequestElement(request);
       $('#pending-requests-container').append($request);
-    }
-  }
+    };
+  };
 
   // console.log('createOrder', createOrder(sampleOrder));
 
- //////////////// CURRENT ORDER DASHBOARD ///////////////////////
+ /********** CURRENT ORDER DASHBOARD **********/
 
   //Creates HTML markup of current order with order-fulfilled form button
   const createOrderElement = function(orderObj) {
@@ -106,10 +127,10 @@ $(document).ready(function() {
         <form id="completed-order" method="POST">
         <button type="submit">Order Fulfilled!</button>
       </form>
-      </section>`
+      </section>`;
 
     return markup;
-    }
+    };
 
   //Renders current order request and appends to current-order-container
   const renderOrder = function(currentOrder) {
@@ -117,7 +138,7 @@ $(document).ready(function() {
       const $order = createOrderElement(order);
       $('#current-orders-container').append($order);
     }
-  }
+  };
 })
 
 

@@ -14,7 +14,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
   <!-- App JS -->
-  <script type="text/javascript" src="/public/scripts/restaurant-home.js"></script>
+  <script type="text/javascript" src="/scripts/restaurant-home.js"></script>
 
 
   <title>Restaurant - Home</title>
@@ -34,11 +34,13 @@
         </ul>
         <label>Additional comments</label>
         <p>No peanuts and medium spicy</p>
-        <form id="time-estimate" method="POST">
-          <label for="submit-time-estimate">How much time will this order take?</label>
-          <input name="submit-time-estimate" placeholder="Enter Time Estimate"></input>
+
+        <form id="time-estimate">
+          <label for="submitTimeEstimate">How much time will this order take?</label>
+          <input name="submitTimeEstimate" placeholder="Enter Time Estimate"></input>
           <button type="submit">Confirm Request</button>
         </form>
+
       </section>
     </section>
     <section id="current-orders-container">

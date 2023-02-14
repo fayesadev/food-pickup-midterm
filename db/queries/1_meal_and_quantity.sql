@@ -1,4 +1,4 @@
-SELECT customers.name as customer, orders.order_time, meals.name as meal_item, order_meals.meal_quantity as quantity
+SELECT orders.id as order_id, customers.name as customer , orders.order_time, meals.name as meal_item, order_meals.meal_quantity as quantity
 FROM meals
 JOIN order_meals ON meal_id = meals.id
 JOIN orders ON order_id = orders.id
