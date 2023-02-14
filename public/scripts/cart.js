@@ -4,18 +4,21 @@
 $(document).ready(function() {
 
   let order = {
-    hamburger: {
+    1: {
       id: 1,
+      name: 'hamburger',
       price: 10,
       qty: 0
     },
-    pizza: {
+    3: {
       id: 3,
+      name: 'fries',
       price: 5,
       qty: 0
     },
-    fries: {
+    2: {
       id: 2,
+      name: 'shake',
       price: 15,
       qty: 0
     }
@@ -23,41 +26,70 @@ $(document).ready(function() {
 
   //ADD ITEMS: when add to cart is clicked, add item to cart
   $(".addtocart").click((e) => {
-    const btnId = e.currentTarget.value;
-    order[btnId].qty += 1;
-    $('.cart-items')[0].prepend("<p>Test</p>");
+    const id = e.currentTarget.value;
+    if (order[id].qty > 0) {
+      return alert("item already selected");
+    }
+
+    order[id].qty += 1;
+    const $orderItem = createCartElement(id);
+    $('.cart-items')[0].prepend($orderItem);
+
+    addRemoveItemsEventListener();
+    updateCartTotal();
   });
-  //REMOVE ITEMS: when remove button is clicked, remove item from cart
-  const removeCartItemButtons = $(".btn-danger");
-  const removeCartItems = () => {
+
+
+  //CREATE CART ELEMENT: takes in menu item object, returns a cart <article>
+  const createCartElement = (obj) => {
+
+    const $cartItem = $(
+      `<article class="cart-items">
+      <div class="cart-row">
+        <span class="cart-col-1 cart-column name" id="${order[obj].id}">${obj.name}</span>
+        <span class="cart-col-2 cart-column price">$${order[obj].price}</span>
+        <div class="cart-col-3 cart-column qty">
+          <input class="cart-col-3-input" type="number" value="${order[obj].qty}">
+          <button class="btn btn-danger" type="button">x</button>
+        </div>
+      </article>`
+    );
+
+    return $cartItem[0];
+  };
+
+  //REMOVE ITEMS: when remove button is clicked, remove item from cart (front-end)
+  const addRemoveItemsEventListener = () => {
+    const removeCartItemButtons = $(".btn-danger");
     for (const btn of removeCartItemButtons) {
       btn.addEventListener('click', (e) => {
         const btnClicked = e.target;
-        btnClicked.parentElement.parentElement.remove();
-        updateCartTotal();
+        const row = btnClicked.parentElement.parentElement;
+        removeItemFromOrder(row);
       });
     }
   };
 
-  removeCartItems();
+  const removeItemFromOrder = (item) => {
 
-  //CALCULATE TOTAL: keeps count of cart total
-  const updateCartTotal = () => {
+    item.remove(); //remove html row from browser
+    const id = $(item).children().first().attr('id')[0];
 
-    const cart = $('.cart-items')[0];
-    //console.log("cart:",cart, cart.children);
-    for (const item of cart.children) {
-      //const priceElement = $(item).find('.price').text();
-      let qty = $(item).find('.qty').find('input').val();
-
-      const price = parseFloat($(item).find('.price').text().replace(/([^0-9\\.])/g,""));
-      let x = Number($(item).find('.price').text());
-
-      //console.log(qty);
-    }
-    //const items = $(".cart-container .cart-items .cart-row")[0];
-    //console.log(items);
+    order[id].qty = 0;
+    updateCartTotal();//will update item in the cart
   };
+
+
+  //CALCULATE TOTAL: takes in id (string) of menu item and tracks cart total
+  const updateCartTotal = () => {
+    const total = Object.values(order).reduce((acc, cur) => {
+      return acc + (cur.price * cur.qty);
+
+    }, 0);
+    $('.cart-total-price').html(total.toFixed(2));
+  };
+
+  addRemoveItemsEventListener();
 });
 
 
@@ -73,3 +105,4 @@ $(document).ready(function() {
 
 
 //if no items in the cart, warning pups up if they click proceed to checkout
+

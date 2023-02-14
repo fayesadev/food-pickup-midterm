@@ -98,6 +98,7 @@ cart-column {
 .cart-row {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 10px 0;
 }
 
@@ -152,7 +153,6 @@ cart-column {
 
 .cart-total-price {
   color: #333;
-  font-size: 1.1em;
 }
 
 .btn-purchase {
