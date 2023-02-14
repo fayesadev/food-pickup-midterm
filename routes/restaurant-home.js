@@ -5,6 +5,8 @@
 const express = require('express');
 const router  = express.Router();
 const ordersQueries = require('../db/queries/orders');
+
+
 //Need 2 post routes: entering time estimate submit and order fulfilled submit
 
 router.get('/', (req, res) => {
@@ -21,9 +23,18 @@ router.get('/', (req, res) => {
 //   })
 // })
 
-router.post('/requests', (req, res) => {
+router.post('/orders', (req, res) => {
   console.log("req.body", req.body);
+  const timeEstimate = req.body.timeEstimate;
+  console.log("timeEstimate", timeEstimate);
+
+  /*orders object[timeEstimate] = timeEstimate*/
+  
   res.redirect('/restaurants');
 });
+
+// router.get('*', (req, res) => {
+//   res.redirect('/restaurants');
+// })
 
 module.exports = router;

@@ -59,6 +59,16 @@
       number: 7801234567,
       order_time: '1:15pm',
       customRequest: 'No peanuts pls'
+    }, {
+      order: {
+        'Roast Beef': 1,
+        'Chicken Club': 2,
+        'Philly Cheesesteak': 3
+      },
+      name: 'Lauren',
+      number: 7801234567,
+      order_time: '1:15pm',
+      customRequest: 'No peanuts pls'
     }
   ]
 
@@ -84,9 +94,9 @@
         </ul>
         <label>Additional comments</label>
         <p>${customRequest}</p>
-        <form id="time-estimate" method="POST" action="/restaurants/requests">
-          <label for="submit-time-estimate">How much time will this order take?</label>
-          <input name="submit-time-estimate" placeholder="Enter Time Estimate"></input>
+        <form id="timeEstimate" method="POST" action="/restaurants/orders">
+          <label for="timeEstimate">How much time will this order take?</label>
+          <input name="timeEstimate" placeholder="Enter Time Estimate"></input>
           <button type="submit">Confirm Request</button>
         </form>
       </section>`;
@@ -129,7 +139,7 @@
         </ul>
         <label>Additional comments</label>
         <p>${customRequest}</p>
-        <form id="completed-order" method="POST" action="/restaurants/orders">
+        <form id="completed-order" method="POST" action="/restaurants/orders/history">
         <button type="submit">Order Fulfilled!</button>
       </form>
       </section>`;
@@ -150,8 +160,12 @@ $(document).ready(function () {
   renderOrder(orders);
 });
 
-$('#submit-tweet').submit(function(event) {
-    event.preventDefault();
-    const $text = $(this).serialize();
-
-});
+// $('#time-estimate').submit(function(event) {
+//   event.preventDefault();
+//   const $text = $(this).serialize();
+//   console.log($text);
+//   $.post('/restaurants/requests', $text)
+//   .then(()=>{
+//     $('new-order-request').empty();
+//   })
+// });
