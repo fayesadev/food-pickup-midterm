@@ -25,18 +25,18 @@
   };*/
 
   /*Sample order object*/
-  const sampleOrder = {
+  const newRequest = [{
     id: 1,
     order: {
-      'Roast Beef': 1,
-      'Chicken Club': 2,
-      'Philly Cheesesteak': 1
+      'Dummy': 1,
+      'MonkeyFuzz': 2,
+      'FuzzyMonk': 1
     },
-    name: 'Robbie',
+    name: 'Donald Duck',
     number: 7801234567,
     order_time: '1:15pm',
     customRequest: 'No peanuts pls'
-  };
+  }];
 
   const orders = [
     {
@@ -97,7 +97,7 @@
         <form id="timeEstimate" method="POST" action="/restaurants/orders">
           <label for="timeEstimate">How much time will this order take?</label>
           <input name="timeEstimate" placeholder="Enter Time Estimate"></input>
-          <button type="submit">Confirm Request</button>
+          <button id="submitTime" type="submit">Confirm Request</button>
         </form>
       </section>`;
 
@@ -112,10 +112,12 @@
     };
   };
 
-  // const loadRequest = function() {
-  //   $.get()
-  // }
-  // console.log('createOrder', createOrder(sampleOrder));
+  const loadRequest = function() {
+    $.get('/restaurants', function() {
+      //Render dummy new request
+      renderRequest(newRequest);
+    })
+  }
 
  /********** CURRENT ORDER DASHBOARD **********/
 
@@ -155,9 +157,21 @@
     }
   };
 
+  const loadOrder = function() {
+    $.get('/restaurants', function() {
+      renderOrder(newRequest);
+    })
+  }
+
 $(document).ready(function () {
-  renderRequest(orders);
   renderOrder(orders);
+
+  $('#dummybutton').click(function() {
+    loadRequest();
+  });
+  $('#submitTime').click(function() {
+    loadOrder();
+  })
 });
 
 // $('#time-estimate').submit(function(event) {
