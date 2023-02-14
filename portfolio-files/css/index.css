@@ -210,10 +210,6 @@ main {
   align-items: center;
 }
 
-#confirmation-form {
-  display: none;
-}
-
 .order-form {
   background-color: #fff;
   position: absolute;

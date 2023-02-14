@@ -125,8 +125,10 @@ $(document).ready(function() {
 
     if (numOfItems === 0) {
       return alert("please select an item");
-    };
+    }
+
   };
+
   $('.btn-btn-checkout').click(() => proceedToCheckOut());
 
 });
