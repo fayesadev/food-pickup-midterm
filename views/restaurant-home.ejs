@@ -7,11 +7,12 @@
 
   <!-- App CSS -->
   <link rel="stylesheet" href="/styles/restaurant-home.css"/>
-  <!-- <link rel="stylesheet" href="/styles/main.css" />
-  <link rel="stylesheet" href="/styles/layout.css" /> -->
+  <link rel="stylesheet" href="/styles/main.css" />
+  <!-- <link rel="stylesheet" href="/styles/layout.css" /> -->
 
   <!-- External JS -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="/vendor/jquery-3.0.0.js"></script>
 
   <!-- App JS -->
   <script type="text/javascript" src="/scripts/restaurant-home.js"></script>
@@ -21,78 +22,8 @@
 </head>
 <body>
   <main>
-    <section id="pending-requests-container">
-      <section class="new-order-request">
-        <header>
-          <h3>Andy Lindsay</h3>
-          <h3>12:00pm</h3>
-        </header>
-        <ul>
-          <li>1x Beef Tacos</li>
-          <li>2x Guacamole & Chips</li>
-          <li>1x Fish Tacos</li>
-        </ul>
-        <label>Additional comments</label>
-        <p>No peanuts and medium spicy</p>
-
-        <form id="time-estimate">
-          <label for="submitTimeEstimate">How much time will this order take?</label>
-          <input name="submitTimeEstimate" placeholder="Enter Time Estimate"></input>
-          <button type="submit">Confirm Request</button>
-        </form>
-
-      </section>
-    </section>
-    <section id="current-orders-container">
-      <section class="current-order">
-        <header>
-          <h3>Lauren Johnston</h3>
-          <h3>11:30am</h3>
-        </header>
-        <ul>
-          <li>1x Salsa Verde</li>
-          <li>2x Guacamole & Chips</li>
-          <li>1x Beef Birria Tacos</li>
-        </ul>
-        <label>Additional comments</label>
-        <p>Include more hotsauce packets please</p>
-        <form id="completed-order" method="POST">
-          <button type="submit">Order Fulfilled!</button>
-        </form>
-      </section>
-      <section class="current-order">
-        <header>
-          <h3>Faye Dumbrigue</h3>
-          <h3>11:40am</h3>
-        </header>
-        <ul>
-          <li>1x Salsa Verde</li>
-          <li>2x Guacamole & Chips</li>
-          <li>1x Beef Birria Tacos</li>
-        </ul>
-        <label>Additional comments</label>
-        <p>Include more hotsauce packets please</p>
-        <form id="completed-order" method="POST">
-          <button type="submit">Order Fulfilled!</button>
-        </form>
-      </section>
-      <section class="current-order">
-        <header>
-          <h3>Robbie Thomas</h3>
-          <h3>11:50am</h3>
-        </header>
-        <ul>
-          <li>1x Chicken Quesadilla</li>
-          <li>2x Soft Drink</li>
-          <li>1x Pulled Pork Tacos</li>
-        </ul>
-        <label>Additional comments</label>
-        <p>No pickles</p>
-        <form id="completed-order" method="POST">
-          <button type="submit">Order Fulfilled!</button>
-        </form>
-      </section>
-    </section>
+    <section id="pending-requests-container"></section>
+    <section id="current-orders-container"></section>
   </main>
 </body>
 </html>

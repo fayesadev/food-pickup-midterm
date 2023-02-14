@@ -1,11 +1,11 @@
-$(document).ready(function() {
+
 /***********  HELPER FUNCTIONS **********/
 
 //Returns HTML markup of meal and quantity list passed in an object
   const mealList = function(mealObj) {
     let string = '';
     for (let meal in mealObj) {
-      string += `<li>${mealObj[meal]}x ${meal}<li> \n`;
+      string += `<li>${mealObj[meal]}x ${meal}</li>`;
     }
     return string;
   };
@@ -15,17 +15,18 @@ $(document).ready(function() {
     'Chicken Club': 2,
     'Philly Cheesesteak': 1
   }
-  console.log('mealList', mealList(mealObj)); */
+  console.log('mealList', mealList(mealObj));*/
 
   //Encodes string to become safe HTML and prevent XSS
-  const escape = function(str) {
+  /*const escape = function(str) {
     let text = document.createElement("text");
     text.appendChild(document.createTextNode(str));
     return text.innerHTML;
-  };
+  };*/
 
   /*Sample order object*/
   const sampleOrder = {
+    id: 1,
     order: {
       'Roast Beef': 1,
       'Chicken Club': 2,
@@ -36,6 +37,7 @@ $(document).ready(function() {
     order_time: '1:15pm',
     customRequest: 'No peanuts pls'
   };
+
   const orders = [
     {
       order: {
@@ -49,11 +51,11 @@ $(document).ready(function() {
       customRequest: 'No peanuts pls'
     }, {
       order: {
-        'Roast Beef': 1,
+        'Roast Beef': 2,
         'Chicken Club': 2,
-        'Philly Cheesesteak': 1
+        'Philly Cheesesteak': 2
       },
-      name: 'Robbie',
+      name: 'Faye',
       number: 7801234567,
       order_time: '1:15pm',
       customRequest: 'No peanuts pls'
@@ -68,7 +70,7 @@ $(document).ready(function() {
     // const number = customer.phone_number;
     // const timeEstimate = order.est_completion_time;
     const orderTime = orderObj.order_time;
-    const customRequest = escape(orderObj.customRequest);
+    const customRequest = orderObj.customRequest;
     const meals = mealList(orderObj.order);
 
     const markup = `
@@ -82,7 +84,7 @@ $(document).ready(function() {
         </ul>
         <label>Additional comments</label>
         <p>${customRequest}</p>
-        <form id="time-estimate" method="POST">
+        <form id="time-estimate" method="POST" action="/restaurants/requests">
           <label for="submit-time-estimate">How much time will this order take?</label>
           <input name="submit-time-estimate" placeholder="Enter Time Estimate"></input>
           <button type="submit">Confirm Request</button>
@@ -93,13 +95,16 @@ $(document).ready(function() {
     };
 
   //Renders pending order request and appends to pending-requests-container
-  const renderRequest = function(orderRequests) {
-    for (let request of orderRequests) {
-      const $request = createRequestElement(request);
+  const renderRequest = function(orders) {
+    for (let order of orders) {
+      const $request = createRequestElement(order);
       $('#pending-requests-container').append($request);
     };
   };
 
+  // const loadRequest = function() {
+  //   $.get()
+  // }
   // console.log('createOrder', createOrder(sampleOrder));
 
  /********** CURRENT ORDER DASHBOARD **********/
@@ -110,7 +115,7 @@ $(document).ready(function() {
     // const number = customer.phone_number;
     // const timeEstimate = order.est_completion_time;
     const orderTime = orderObj.order_time;
-    const customRequest = escape(orderObj.customRequest);
+    const customRequest = orderObj.customRequest;
     const meals = mealList(orderObj.order);
 
     const markup = `
@@ -124,7 +129,7 @@ $(document).ready(function() {
         </ul>
         <label>Additional comments</label>
         <p>${customRequest}</p>
-        <form id="completed-order" method="POST">
+        <form id="completed-order" method="POST" action="/restaurants/orders">
         <button type="submit">Order Fulfilled!</button>
       </form>
       </section>`;
@@ -139,6 +144,14 @@ $(document).ready(function() {
       $('#current-orders-container').append($order);
     }
   };
-})
 
+$(document).ready(function () {
+  renderRequest(orders);
+  renderOrder(orders);
+});
 
+$('#submit-tweet').submit(function(event) {
+    event.preventDefault();
+    const $text = $(this).serialize();
+
+});

@@ -11,11 +11,19 @@ router.get('/', (req, res) => {
   res.render('restaurant-home');
 });
 
-router.get('/orders', (req, res) => {
-  ordersQueries.getOrders()
-  .then((orders)=>{
-    res.json(orders);
-  })
-})
+
+//Gather all data about current order and append to restaurant dashboard
+// router.get('/orders', (req, res) => {
+//   ordersQueries.getOrders()
+//   .then((orders)=>{
+//     res.json(orders);
+//     console.log(orders);
+//   })
+// })
+
+router.post('/requests', (req, res) => {
+  console.log("req.body", req.body);
+  res.redirect('/restaurants');
+});
 
 module.exports = router;
