@@ -56,7 +56,7 @@ const createMealItem = (meal, foodCategory) => {
               <div><strong>Price:</strong></div>
               <div>$${formattedPrice}</div>
             </div>
-            <button class="addtocart">
+            <button value="${meal.id}"class="addtocart">
               <div><i class="fas fa-cart-plus"></i> ADD TO CART</div>
             </button>
           </footer>
