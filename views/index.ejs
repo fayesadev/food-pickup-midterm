@@ -115,15 +115,45 @@
       <article class="cart-items">
 
 
-      <!--totals-->
-      <div class="cart-total">
-        <strong class="cart-total-title">Total</strong>
-        <span class="cart-total-price">$0.00</span>
-      </div>
-      <!--submit order-->
-      <button class="btn btn-primary btn-purchase" type="button">Proceed to Checkout</button>
+        <!--totals-->
+        <div class="cart-total">
+          <strong class="cart-total-title">Total</strong>
+          <span class="cart-total-price">$0.00</span>
+        </div>
+        <!--submit order-->
+        <button class="btn btn-purchase btn-checkout" type="button">Proceed to Checkout</button>
     </section>
     <!--SHOPPING CART ENDS-->
+
+    <!--Confirm order form starts-->
+    <form id="confirmation-form" class="order-form" method="post" action="contact-form-process.php">
+      <div class="form-header"><h2>Confirm Details for Pickup</h2></div>
+      <div>
+        <label for="Name" class="order-label">Your name</label>
+        <div class="order-input-group">
+          <input type="text" id="Name" name="Name" class="order-input" placeholder="Jane Smith"required>
+        </div>
+      </div>
+
+      <div>
+        <label for="tel" class="order-label">Your phone number</label>
+        <div class="order-input-group">
+          <input type="tel" id="tel" name="tel" class="order-input" placeholder="+1-555-5555" required>
+        </div>
+      </div>
+
+      <div>
+        <label for="Message" class="order-label">Special Instructions:</label>
+        <div class="order-input-group">
+          <textarea id="Message" name="Message" class="order-input" rows="6" maxlength="1000" placeholder="Allergies, dellivery instructions, etc."></textarea>
+        </div>
+      </div>
+
+      <div class="order-buttons">
+        <button type="button"  class="btn-purchase cancel">Cancel</button>
+        <button type="submit"  class="btn-purchase confirm">Confirm Order</button>
+      </div>
+    </form>
 
   </main>
   <script src="./scripts/meals.js"></script>

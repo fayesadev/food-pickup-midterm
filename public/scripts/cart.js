@@ -109,7 +109,6 @@ $(document).ready(function() {
   const updateCartTotal = () => {
     const total = Object.values(order).reduce((acc, cur) => {
       return acc + (cur.price * cur.qty);
-
     }, 0);
     $('.cart-total-price').html(total.toFixed(2));
   };
@@ -117,19 +116,17 @@ $(document).ready(function() {
   addRemoveItemsEventListener();
 
   //PROCEED TO CHECKOUT: when button is clicked, confirmation form pops up, if no items in the cart, warning pops up
+
+
+  const proceedToCheckOut = () => {
+    const numOfItems = Object.values(order).reduce((acc, cur) => {
+      return acc + (cur.qty);
+    }, 0);
+
+    if (numOfItems === 0) {
+      return alert("please select an item");
+    };
+  };
+  $('.btn-btn-checkout').click(() => proceedToCheckOut());
+
 });
-
-
-
-
-
-
-
-//when confirm order is clicked, order object gets added to the orders table in db as a new row and customer table is also updated
-
-
-
-
-
-//if no items in the cart, warning pups up if they click proceed to checkout
-
