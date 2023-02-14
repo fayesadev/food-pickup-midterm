@@ -1,3 +1,51 @@
+/********** SAMPLE DATA OBJECTS **********/
+
+const newRequest = [{
+  id: 1,
+  order: {
+    'Dummy': 1,
+    'MonkeyFuzz': 2,
+    'FuzzyMonk': 1
+  },
+  name: 'Donald Duck',
+  number: 7801234567,
+  order_time: '1:15pm',
+  customRequest: 'No peanuts pls'
+}];
+
+const orders = [
+  {
+    order: {
+      'Roast Beef': 1,
+      'Chicken Club': 2,
+      'Philly Cheesesteak': 1
+    },
+    name: 'Robbie',
+    number: 7801234567,
+    order_time: '1:15pm',
+    customRequest: 'No peanuts pls'
+  }, {
+    order: {
+      'Roast Beef': 2,
+      'Chicken Club': 2,
+      'Philly Cheesesteak': 2
+    },
+    name: 'Faye',
+    number: 7801234567,
+    order_time: '1:15pm',
+    customRequest: 'No peanuts pls'
+  }, {
+    order: {
+      'Roast Beef': 1,
+      'Chicken Club': 2,
+      'Philly Cheesesteak': 3
+    },
+    name: 'Lauren',
+    number: 7801234567,
+    order_time: '1:15pm',
+    customRequest: 'No peanuts pls'
+  }
+]
 
 /***********  HELPER FUNCTIONS **********/
 
@@ -25,52 +73,6 @@
   };*/
 
   /*Sample order object*/
-  const newRequest = [{
-    id: 1,
-    order: {
-      'Dummy': 1,
-      'MonkeyFuzz': 2,
-      'FuzzyMonk': 1
-    },
-    name: 'Donald Duck',
-    number: 7801234567,
-    order_time: '1:15pm',
-    customRequest: 'No peanuts pls'
-  }];
-
-  const orders = [
-    {
-      order: {
-        'Roast Beef': 1,
-        'Chicken Club': 2,
-        'Philly Cheesesteak': 1
-      },
-      name: 'Robbie',
-      number: 7801234567,
-      order_time: '1:15pm',
-      customRequest: 'No peanuts pls'
-    }, {
-      order: {
-        'Roast Beef': 2,
-        'Chicken Club': 2,
-        'Philly Cheesesteak': 2
-      },
-      name: 'Faye',
-      number: 7801234567,
-      order_time: '1:15pm',
-      customRequest: 'No peanuts pls'
-    }, {
-      order: {
-        'Roast Beef': 1,
-        'Chicken Club': 2,
-        'Philly Cheesesteak': 3
-      },
-      name: 'Lauren',
-      number: 7801234567,
-      order_time: '1:15pm',
-      customRequest: 'No peanuts pls'
-    }
-  ]
 
 /********** PENDING ORDER REQUESTS SIDE BAR **********/
 
@@ -94,10 +96,10 @@
         </ul>
         <label>Additional comments</label>
         <p>${customRequest}</p>
-        <form id="timeEstimate" method="POST" action="/restaurants/orders">
+        <form class="timeEstimate">
           <label for="timeEstimate">How much time will this order take?</label>
           <input name="timeEstimate" placeholder="Enter Time Estimate"></input>
-          <button id="submitTime" type="submit">Confirm Request</button>
+          <button type="submit">Confirm Request</button>
         </form>
       </section>`;
 
@@ -163,6 +165,8 @@
     })
   }
 
+/********** JQUERY **********/
+
 $(document).ready(function (event) {
   // event.preventDefault();
   renderRequest(orders);
@@ -176,7 +180,8 @@ $(document).ready(function (event) {
     //   $.post('/restaurants/orders', $text)
     //   .then(()=>{
       // })
-  $('#timeEstimate').submit(function() {
+  $('#pending-requests-container').on('submit', '.timeEstimate', function(event) {
+    event.preventDefault();
     $text = $(this).serialize();
     alert('you submitted time!');
     console.log("$text", $text)
