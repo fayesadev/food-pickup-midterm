@@ -5,7 +5,7 @@ require('dotenv').config();
 const sassMiddleware = require('./lib/sass-middleware');
 const express = require('express');
 const morgan = require('morgan');
-// const cookieSession = require("cookie-session");
+const cookieSession = require("cookie-session");
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -27,11 +27,11 @@ app.use(
 );
 app.use(express.static('public'));
 
-// app.use(
-//   cookieSession({
-//     name: "session",
-//     keys: ["test"],
-//   }));
+app.use(
+  cookieSession({
+    name: "session",
+    keys: ["test"],
+  }));
 
 
 // Separated Routes for each Resource
@@ -54,11 +54,11 @@ app.use('/restaurants', restaurantRoutes);
 // Separate them into separate routes files (see above).
 
 
-// app.get("/", (req, res) => {
-//   req.session.user_id = 1;
-//   res.render("index");
-//   console.log(req.session.user_id);
-// });
+app.get("/", (req, res) => {
+  // req.session.user_id = 1;
+  res.render("index");
+  // console.log(req.session.user_id);
+});
 
 
 app.listen(PORT, () => {

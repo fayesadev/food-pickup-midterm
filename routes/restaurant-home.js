@@ -51,6 +51,8 @@ router.get('/', (req, res) => {
 // router.get('/requests', (req, res) => {
 
 // })
+
+//Mentor suggestion
 //Gather all data about current order and append to restaurant dashboard
 // router.get('/orders', (req, res) => {
 //   ordersQueries.getOrders()
@@ -63,6 +65,7 @@ router.get('/', (req, res) => {
 router.post('/orders', (req, res) => {
   const timeEstimate = req.body.timeEstimate;
 
+  //Test to see timeEstimate being stored in orders object
   orders[1].timeEstimate = timeEstimate;
   console.log("orders id 1", orders[1]);
 
