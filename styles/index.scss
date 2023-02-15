@@ -1,7 +1,7 @@
 nav {
+  position: absolute;
   top: 0;
   width: 100%;
-  position: fixed;
   font-weight: 600;
   font-size: 1.5em;
   display: flex;
@@ -10,16 +10,45 @@ nav {
   padding: 20px 1%;
   height: 56px;
   z-index: 100;
-  color: #fff;
+  background-color: ;
+  color: #b1f249;
+}
+
+#see-order {
+  display: none;
+}
+
+#bouncing-nav-arrow {
+  position: absolute;
+  animation: bounce 1.5s linear infinite;
+}
+
+@keyframes bounce {
+  0%   { transform: translateX(60px); }
+  50%  { transform: translateX(80px); }
+  100% { transform: translateX(60px); }
+}
+
+img {
+  border-radius: 5px;
 }
 
 .page-header {
+  top: -56px;
   width: 100%;
-  height: 33vh;
-  background-color: #4b4e4c;
-  font-size: 30px;
+  height: 50vh;
+
+  background: url(/images/cover-photo.png) rgba(33, 19, 13, 0.3);
+  background-repeat: no-repeat;
+  background-blend-mode: multiply;
+  background-position: center center;
+  background-size: cover;
+
+  font-size: 3rem;
+  font-family: 'Arvo', serif;;
+  font-weight: 600;
   letter-spacing: 1px;
-  color: #fff;
+  color:#f2c349;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -33,29 +62,46 @@ nav {
 .food-category {
   font-size: 30px;
   margin-left: 24px;
+  color:#c55336;
+  font-family: 'Rancho', cursive;
 }
 
 .grid-container {
+  margin-left: 20px;
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: 30vw 30vw;
+  row-gap: 1rem;
+  column-gap: 1rem;
 }
 
 
 .meal {
-  padding: 8px;
+  padding: 1rem;
   font-size: 14.5px;
-  padding: 30px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  height: auto;
+  //////
+
+
+}
+
+.meal-header {
+  //////
+  display: flex;
+
 }
 
 .meal-image {
-  width: 77%;
-  height: 75%;
+  max-height: 80px;
+  //////
 }
 
 .meal-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  // display: flex;
+  // align-items: center;
+  // justify-content: space-between;
 }
 
 .addtocart {
@@ -65,13 +111,13 @@ nav {
   border: none;
   font-size: 8px;
   position: relative;
-  background: #007B3E;
-  color: #fff;
+  background:#c55336;
+  color:#fbf3db;
   cursor: pointer;
 }
 
 .fa-cart-plus {
-  background: #007B3E;
+  background:#c55336;
 }
 
 .meal-name {
@@ -87,13 +133,18 @@ nav {
 
 
 .cart-container {
-  min-width: 25vw;
+  width: 33vw;
   min-height: 75vh;
   color: rgb(51,51,51);
   font-size: 14px;
-  background-color: #F7F7F7;
-  border-radius: 3px;
+  background-color: #f2c34a;
+  border-radius: 10px;
   padding: 20px;
+  margin-left: auto;
+  right: 0;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  display: none;
+
 }
 
 
@@ -164,7 +215,8 @@ cart-column {
   color: #333;
 }
 
-.btn-purchase {
+.btn-purchase,
+.btn-checkout {
   box-sizing: border-box;
   cursor: pointer;
   display: inline-block;
@@ -183,12 +235,12 @@ cart-column {
   border-radius: 4px;
   border-style: none;
   background-color: #4b4e4c;
-  color: #fff;
+  color:#fbf3db;
 }
 
-.btn-purchase:hover,
-.btn-purchase:focus {
-  opacity: .75;
+.btn-checkout:hover,
+.btn-checkout:focus {
+  background-color: #62897e
 }
 
 .btn-danger {
@@ -198,7 +250,7 @@ cart-column {
   font-size: 50%;
   font-weight: light;
   border: none;
-  color: #fff;
+  color:#fbf3db;
   cursor: pointer;
   background-color: #cc4c4cce;
   border-radius: 10px;
@@ -217,6 +269,7 @@ cart-column {
 }
 
 //order confirmation form styles
+
 main {
   position: relative;
 }
@@ -227,10 +280,10 @@ main {
 }
 
 #confirmation-form {
-  
+  display: none;
 }
 .order-form {
-  background-color: #fff;
+  background-color:#fbf3db;
   position: absolute;
   margin-left: auto;
   margin-right: auto;
@@ -248,7 +301,7 @@ box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
   line-height: 1.5;
   color: #212529;
   text-align: left;
-  background-color: #fff;
+  background-color:#fbf3db;
   padding: 30px;
   padding-bottom: 10px;
   border: 1px solid #ced4da;
@@ -271,7 +324,7 @@ box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
   padding: 0.375rem 0.75rem;
   line-height: 1.5;
   color: #495057;
-  background-color: #fff;
+  background-color:#fbf3db;
   border: 1px solid #ced4da;
   outline: none;
   border-radius: 0.25rem;
@@ -306,10 +359,17 @@ label.order-label {
 
 .confirm {
   margin-left: .5em;
-  background-color: #007B3E;
+  background-color:#c55336;
   font-weight: 400;
 }
 
+.underline {
+  padding:0;
+  height: 5px;
+  width: 100px;
+  background-color: #62897e;
+  border: none;
+}
 
 
 
