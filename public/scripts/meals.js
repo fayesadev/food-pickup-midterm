@@ -70,21 +70,20 @@ const createMealItem = (meal, foodCategory) => {
 
   //  ----- Update ejs template ----- //
   const mealItem = $(`
-<article class="meal">
-          <header>
-            <img class="meal-image" src="${meal.img}">
-            <div class="meal-name"><strong>${mealName}</strong></div>
-            <div class="meal-description">${meal.dsc}</div>
-          </header>
-          <footer class="meal-footer">
-            <div class="price">
+    <article class="meal">
+      <header class="meal-header>
+        <div class="meal-name"><strong>${mealName}</strong></div>
+        <div><img class="meal-image" src="${meal.img}"></div>
+      </header>
+      <footer class="meal-footer">
+          <div class="price">
               <div><strong>Price:</strong></div>
               <div>$${formattedPrice}</div>
             </div>
             <button value="${meal.id}" id="${meal.id}" class="addtocart">
               <div><i class="fas fa-cart-plus"></i> ADD TO CART</div>
             </button>
-          </footer>
+      </footer>
         </article>
 `);
   $(`#${foodCategory}`).append(mealItem);
@@ -104,7 +103,7 @@ const createMealItem = (meal, foodCategory) => {
 
 
     const $orderItem = createCartElement(id);
-   
+
 
     //addUpdateQuantityEventListener();
     // addRemoveItemsEventListener();
@@ -114,9 +113,10 @@ const createMealItem = (meal, foodCategory) => {
 
 
 $(document).ready(() => {
+  loadMeals("brisket");
+  loadMeals("fried-chicken");
   loadMeals("sandwiches");
-  //loadMeals("fried-chicken");
-  //loadMeals("our-foods");
+
 });
 
 
