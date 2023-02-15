@@ -14,7 +14,6 @@
   <link rel="stylesheet" href="/styles/layout.css" />
 
   <script src="/vendor/jquery-3.0.0.js"></script>
-  <script defer src="/scripts/meals.js"></script>
   <script src="https://kit.fontawesome.com/81d8ede405.js" crossorigin="anonymous"></script>
 
 
@@ -23,7 +22,7 @@
 <body>
   <!-- Top nav bar for logo and to view order -->
   <nav>
-    <span id="logo">FoodHub</span>
+    <span id="logo">MeatHub</span>
     <span><a src="#">View Order</a></span>
   </nav>
 
@@ -61,7 +60,7 @@
         <span class="cart-col-3 cart-column" id="qty-header">QTY</span>
       </div>
       <!--list of order items-->
-      <article class="cart-items">
+      <article class="cart-items"></article>
 
 
         <!--totals-->
@@ -75,7 +74,8 @@
     <!--SHOPPING CART ENDS-->
 
     <!--Confirm order form starts-->
-    <form id="confirmation-form" class="order-form" method="post" action="contact-form-process.php">
+    <!--
+<form id="confirmation-form" class="order-form" method="post" action="contact-form-process.php">
       <div class="form-header"><h2>Confirm Details for Pickup</h2></div>
       <div>
         <label for="Name" class="order-label">Your name</label>
@@ -103,10 +103,13 @@
         <button type="submit"  class="btn-purchase confirm">Confirm Order</button>
       </div>
     </form>
+    -->
+
 
   </main>
-  <script src="./scripts/meals.js"></script>
+
   <script src="./scripts/cart.js"></script>
+  <script src="./scripts/meals.js"></script>
 
 </body>
 
