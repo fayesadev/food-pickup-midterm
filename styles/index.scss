@@ -10,7 +10,23 @@ nav {
   padding: 20px 1%;
   height: 56px;
   z-index: 100;
-  color:#8cbcb0;
+  background-color: ;
+  color: #b1f249;
+}
+
+#see-order {
+  display: none;
+}
+
+#bouncing-nav-arrow {
+  position: absolute;
+  animation: bounce 1.5s linear infinite;
+}
+
+@keyframes bounce {
+  0%   { transform: translateX(60px); }
+  50%  { transform: translateX(80px); }
+  100% { transform: translateX(60px); }
 }
 
 img {
@@ -127,6 +143,7 @@ img {
   margin-left: auto;
   right: 0;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  display: none;
 
 }
 
@@ -198,6 +215,7 @@ cart-column {
   color: #333;
 }
 
+.btn-purchase,
 .btn-checkout {
   box-sizing: border-box;
   cursor: pointer;
@@ -251,6 +269,7 @@ cart-column {
 }
 
 //order confirmation form styles
+
 main {
   position: relative;
 }

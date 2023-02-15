@@ -78,7 +78,7 @@ const createMealItem = (meal, foodCategory) => {
   $(`#${meal.id}`).click((e) => {
     const id = e.currentTarget.value;
     const order = JSON.parse(localStorage.getItem('order'));
-    
+
     if (!order[id]) {
       order[id] = { id: meal.id, name: mealName, price: formattedPrice, qty: 1 };
     } else {
@@ -111,7 +111,6 @@ const createCartElement = (id) => {
       `
   );
   $('.cart-items').append($cartItem);
-
   //----- add event listener to remove item from cart and local storage updates -----//
   $(`#remove-cart-${order[id].id}`)[0].addEventListener('click', (e) => {
     const btnClicked = e.target;
@@ -124,6 +123,7 @@ const createCartElement = (id) => {
     const item = e.target;
     const qty = $(item).val()[0];
     updateCartQuantity(id, qty);
+
   });
 
   return $cartItem[0];
@@ -135,10 +135,17 @@ const createCartElement = (id) => {
 //
 const updateCartTotal = () => {
   const order = JSON.parse(localStorage.getItem('order'));
+  console.log(order);
   const total = Object.values(order).reduce((acc, cur) => {
     return acc + (cur.price * cur.qty);
   }, 0);
   $('.cart-total-price').html(total.toFixed(2));
+
+  if ($('.cart-items').children().length === 0) {
+    ($('.cart-container')).hide(100);
+  } else {
+    ($('.cart-container')).show(100);
+  }
 };
 
 
@@ -164,6 +171,7 @@ const removeItemFromOrder = (item) => {
   const id = $(item).attr('id').split('.')[1];
   delete order[id];
   localStorage.setItem('order', JSON.stringify(order));
+  updateCartTotal();
 
   //will update item in the cart
 };
@@ -173,22 +181,39 @@ const removeItemFromOrder = (item) => {
 // PROCEED TO CHECKOUT
 //
 $('.btn-checkout').click(function() {
+
   const order = JSON.parse(localStorage.getItem('order'));
   //----- count number of order items is > 0 -----//
   const numOfItems = Object.values(order).reduce((acc, cur) => {
     return acc + (cur.qty);
-  }, 1);
-
+  }, 0);
   if (numOfItems === 0) return alert("please select an item");
 
   //----- proceed to checkout if number of order items is > 0 -----//
-  const form = $(`#confirmation-form`);
-  console.log(form);
-  if (form.style.display === "none") {
-    form.style.display = "block";
-  } else {
-    form.style.display = "none";
-  }
+  const form = $(`#confirmation-form`)[0];
+  $(form).show(100);
+});
+
+//
+// CANCEL CHECKOUT
+//
+$('.cancel').click(function() {
+  const form = $(`#confirmation-form`)[0];
+  $(form).hide(100);
+});
+
+//
+// CONFIRM CHECKOUT
+//
+$('.confirm').click(function() {
+  if ($('#Name').val().length === 0 || $('#tel').val().length === 0) return;
+
+  //-----If the customer returns to the order page, the see order button will be visible -----//
+  const seeOrderBtn = $(`#see-order`)[0];
+  $(seeOrderBtn).show(100);
+
+  //need post method
+  //post(userinfo, order) to get order const order = JSON.parse(localStorage.getItem('order'));
 });
 
 
