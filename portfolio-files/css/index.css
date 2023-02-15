@@ -179,7 +179,7 @@ cart-column {
   color: #333;
 }
 
-.btn-purchase {
+.btn-checkout {
   box-sizing: border-box;
   cursor: pointer;
   display: inline-block;
@@ -201,8 +201,8 @@ cart-column {
   color: #fbf3db;
 }
 
-.btn-purchase:hover,
-.btn-purchase:focus {
+.btn-checkout:hover,
+.btn-checkout:focus {
   background-color: #62897e;
 }
 
@@ -238,6 +238,10 @@ main {
 .form-header {
   width: 100%;
   align-items: center;
+}
+
+#confirmation-form {
+  display: none;
 }
 
 .order-form {
