@@ -1,0 +1,176 @@
+.content-container {
+  background-color: #3c2525;
+  width: 90vw;
+  margin: 30px auto;
+  border: solid grey 3px;
+  border-radius: 10px;
+  height: 60vh;
+  position: relative;
+}
+
+.content {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.home-button {
+  background-color: #af9355;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  text-decoration: none;
+  color: white;
+}
+
+.home-button:hover {
+  background-color: darkgrey;
+}
+
+.pickup-alert {
+  text-align: center;
+  font-size: 30px;
+  color: white;
+}
+
+.progress-bar {
+  margin: auto;
+  position: relative;
+  width: 500px;
+  height: 3em;
+  background-color: #252525;
+  border-radius: 1.5rem;
+  color: white;
+}
+
+.progress-bar::before {
+  content: attr(data-label);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  left: 0.5em;
+  top: 0.5em;
+  bottom: 0.5em;
+  width: calc(var(--width, 0) * 1%);
+  min-width: 2rem;
+  max-width: calc(100% - 1em);
+  background-color: #af9355;
+  border-radius: 1em;
+  padding: 1em;
+}
+
+.blob {
+  background: #af9355;
+  border-radius: 50%;
+  margin: auto;
+  height: 80px;
+  width: 80px;
+  box-shadow: 0 0 0 0 #af9355;
+  transform: scale(1);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+}
+.fa {
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 48px;
+}
+
+.hidden {
+  display: none;
+}
+
+.button {
+  font-size: 16px;
+  margin: 20px auto;
+  padding: 15px;
+  display: block;
+  text-align: center;
+}
+
+.review-page {
+  border: solid darkgray 2px;
+  width: 60vw;
+  margin: auto;
+  border-radius: 5px;
+  padding: 0 40px;
+  background-color: #af9355;
+}
+
+.review-title {
+  text-align: center;
+  color: white;
+  font-size: 36px;
+}
+
+.food-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.food-name {
+  color: white;
+  font-size: 20px;
+}
+
+.ratings-wrapper {
+  border: thin solid #555;
+  display: inline-block;
+  margin: 0 10px;
+  padding: 0 10px;
+  background-color: #4b4141;
+}
+
+.ratings {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.ratings span {
+  cursor: pointer;
+  transition: color 0.2s, transform 0.2s;
+  font-size: 25px;
+  padding-bottom: 5px;
+}
+
+.ratings span:hover {
+  color: orange;
+  transform: scale(1.1);
+}
+
+.ratings span:hover ~ span {
+  color: orange;
+}
+
+.ratings span[data-clicked] {
+  color: orange;
+}
+
+.ratings span[data-clicked] ~ span {
+  color: orange;
+}
+
+.reset-star {
+  color: #555 !important;
+}
