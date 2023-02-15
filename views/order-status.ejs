@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
     <title>Users</title>
 
@@ -23,14 +22,17 @@
 
   <body>
     <nav>
-      <span id="logo">FoodHub</span>
-      <button class="home-button">Order Again</button>
+      <span id="logo">MeatHub</span>
+      <!-- <button class="home-button">Order Again</button> -->
+      <a class="home-button" href="/">Return Home</a>
     </nav>
     <header class="page-header">
       <h2>Order Successful!</h2>
     </header>
-    <div class="content">
-      <div id="initial-order">
+
+
+    <div class="content-container">
+      <div class="content" id="initial-order">
         <h3 class="pickup-alert">
           The restaurant will confirm your estimated pick up time shortly...
         </h3>
@@ -38,23 +40,18 @@
           <i class="fa fa-clock-o"></i>
         </div>
       </div>
-      <div id="order-estimate" class="hidden">
-        <h3 id="pickup-alert"></h3>
-        <div
-          class="progress-bar"
-          data-label="Preparing your order..."
-          style="--width: 0"
-        ></div>
-      </div>
-      <div id="order-complete" class="hidden">
+      <div id="order-estimate" class="hidden content"></div>
+      <div id="order-complete" class="hidden content">
         <h3 class="pickup-alert">
           Your order is ready for pick up! Thank you for eating with Foodhub :)
         </h3>
+        <button class="button home-button" id="review">Leave a review of your items</button>
+      </div>
+      <div id="order-review" class="content">
       </div>
     </div>
 
     <button id="order-duration-button">Order Duration</button>
     <button id="order-complete-button">Order Complete</button>
   </body>
-
 </html>
