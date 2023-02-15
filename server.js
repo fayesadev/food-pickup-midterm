@@ -55,9 +55,9 @@ app.use('/restaurants', restaurantRoutes);
 
 
 app.get("/", (req, res) => {
-  req.session.user_id = 1;
+  // req.session.user_id = 1;
   res.render("index");
-  console.log(req.session.user_id);
+  // console.log(req.session.user_id);
 });
 
 
