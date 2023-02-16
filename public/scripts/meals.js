@@ -61,9 +61,9 @@ const createMealItem = (meal, foodCategory) => {
   //  ----- Update ejs template ----- //
   const mealItem = $(`
     <article class="meal">
-      <header class="meal-header>
-        <div class="meal-name"><strong>${mealName}</strong></div>
-        <div><img class="meal-image" src="${meal.img}"></div>
+      <header class="meal-header">
+      <div><img class="meal-image" src="${meal.img}"></div>
+      <div class="meal-name"><strong>${mealName}</strong></div>
       </header>
       <footer class="meal-footer">
         <div class="price">
@@ -106,7 +106,7 @@ const createCartElement = (id) => {
   //----- show item on browser in the cart -----//
   const $cartItem = $(
     `
-      <div class="cart-row-" id="cart-row.${order[id].id}">
+      <div class="cart-row" id="cart-row.${order[id].id}">
         <span class="cart-col-1 cart-column name" id="${order[id].id}">${order[id].name}</span>
         <span class="cart-col-2 cart-column price">$${order[id].price}</span>
         <div class="cart-col-3 cart-column qty">
@@ -217,7 +217,7 @@ $('.cancel').click(function() {
 //
 $('.confirm').click(function() {
   if ($('#name').val().length === 0 || $('#tel').val().length === 0) return;
-  
+
   //----- proceed to checkout if number of order items is > 0 -----//
   const userOrder = {
     order: JSON.parse(localStorage.getItem('order')),
@@ -225,7 +225,7 @@ $('.confirm').click(function() {
     tel: $('#tel').val(),
     message: $('#message').val()
   }
- 
+
   localStorage.setItem("userOrder", JSON.stringify(userOrder));
 
   // send query to API

@@ -40,7 +40,7 @@ nav {
   grid-template-columns: auto auto auto;
 }
 
-.meal {
+/* .meal {
   padding: 8px;
   font-size: 14.5px;
   padding: 30px;
@@ -51,11 +51,12 @@ nav {
   height: 75%;
 }
 
+
 .meal-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
+} */
 
 .addtocart {
   display: block;
@@ -384,8 +385,10 @@ body {
   width: 100%;
   margin: 0;
   padding: 0;
-  color: #333333;
+  /* color: #FFF; */
+  color:black;
   background-color: #FFF;
+  /* background-color:#101416; */
 }
 
 .section-heading {
