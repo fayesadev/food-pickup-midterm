@@ -15,18 +15,19 @@ const createRequestElement = function (orderObj) {
 
   const markup = `
     <section id="${orderObj.id}-order-request-container" class="new-order-request">
-        <header>
+        <header class="request-text">
           <h3>${name}</h3>
           <h3>${orderTime}</h3>
         </header>
         <ul style="list-style: none;" class="request-text">
           ${meals}
         </ul>
-        <label>Additional comments</label>
-        <p>${customRequest}</p>
-        <form class="timeEstimate">
-          <label for="timeEstimate">How much time will this order take?</label>
+        <label class="request-text">Additional comments</label>
+        <p class="request-text">${customRequest}</p>
+        <form class="timeEstimate request-text">
+          <label for="timeEstimate">How long will this order take?</label>
           <input id="${orderObj.id}-input" name="timeEstimate" placeholder="Enter Time Estimate"></input>
+          <span id="error" class="error">Please enter a valid time</span>
           <button id="${orderObj.id}-btn" class="btn-submit" type="button">Confirm Request</button>
         </form>
       </section>`;
@@ -34,8 +35,11 @@ const createRequestElement = function (orderObj) {
   $("#pending-requests-container").append(markup);
 
   $(`#${orderObj.id}-btn`).click(function (e) {
-    if ($(`#${orderObj.id}-input`).val().length === 0) return;
-    addToProcessedOrders(userOrder); 
+    if ($(`#${orderObj.id}-input`).val().length === 0) {
+      $('#error').slideDown().css("display", "flex").delay(2000).slideUp();
+      return;
+    }
+    addToProcessedOrders(userOrder);
     $("#initial-order").slideUp();
     $("#order-estimate").slideDown();
     ($(`#${orderObj.id}-order-request-container`)).hide(100);
@@ -69,7 +73,7 @@ const addToProcessedOrders = (orderObj) => {
       </section>`;
 
       $("#current-orders-container").append(markup);
-      
+
       $(`#${orderObj.id}-btn-confirm`).click(function (e) {
         ($(`#${orderObj.id}-order-confirmed-container`)).hide(100);
       });
