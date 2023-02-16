@@ -7,18 +7,18 @@
 
 const express = require('express');
 const router  = express.Router();
-const {getOrders} = 
+// const {insertRowsInDb} = require('db/queries/orders.js') 
 
 router.post('/', (req, res) => {
   res.render('order-status');
 }); 
 
-router.post('/orderTime', (req,res) => {
-  getOrders().then().catch();
+//
+router.post('/orderDb', (req,res) => {
+  // insertRowsInDb().then().catch();
   res.status(200).send('ok');
 })
 
-// query to get all orders
-// query to create an order
+
 
 module.exports = router;

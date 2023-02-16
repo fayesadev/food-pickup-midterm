@@ -233,7 +233,10 @@ $('.confirm').click(function() {
   // data includes userOrder object
   // conditional if success
   // catch error and send alert
-  // $.post()
+  $.post('/orderDb', data, function (res) {
+    console.log(data);
+    const order = JSON.parse(localStorage.getItem('order'));
+  })
 
   $.get('/sms/placed')
   socket.emit('newOrder', 'awesome!');

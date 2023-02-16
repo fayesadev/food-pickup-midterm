@@ -1,7 +1,58 @@
 const db = require("../connection");
-const { order } = require("../../public/scripts/meals.js");
 
-console.log(order);
+
+
+
+// query to create an order
+const insertCustomerIntoDb = (obj) => {
+  const sql = `INSERT INTO customers (
+    name, phone_number)
+      VALUES($1, $2)
+    
+  `;
+  return db.query(sql,[obj.1, obj.2]);
+};
+
+const insertRowsInOrdersDb = (obj) => {
+  return db
+  .query(`
+  INSERT INTO orders (
+    id, customer_id, special_instructions
+  )
+  VALUES (
+    $1, (SELECT id FROM customers WHERE id= ????), $3
+  )
+  `, [obj.1, obj.2, obj.3])
+  .then((result) => {
+    return result.rows[0];
+  })
+  .catch((err) => {
+    console.log(err.message);
+  })
+};
+
+const insertRowsInMealsDb = (obj) => {
+  return db
+  .query(`
+  INSERT INTO meals`)
+}
+
+
+
+// query to get all orders (these are the inset statements e will need to start)
+const getAllOrders = () => {
+  //const sqlUser = 
+  //outer.query(sql)
+};
+
+
+
+
+
+
+
+
+
 const getOrders = () => {
   return db
     .query(
