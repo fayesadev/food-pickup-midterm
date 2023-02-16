@@ -2,7 +2,7 @@
 /********** GLOBAL VARIABLES **********/
 const userOrder = JSON.parse(localStorage.getItem("userOrder"));
 const d = new Date();
-const orderTime = d.toString();
+const orderTime = d.toLocaleTimeString();
 
 
 /*********** PENDING ORDER REQUESTS **********/
@@ -55,19 +55,19 @@ const addToProcessedOrders = (orderObj) => {
   const meals = mealList(orderObj.order);
   console.log("foo bar");
   const markup = `
-    <section id="${orderObj.id}-order-confirmed-container" class="new-order-request">
-      <header>
+    <section id="${orderObj.id}-order-confirmed-container" class="current-order">
+      <header class="request-text">
         <h3>${name}</h3>
         <h3>${orderTime}</h3>
       </header>
-        <ul>
+        <ul style="list-style: none;" class="request-text">
           ${meals}
         </ul>
-        <label>Additional comments</label>
-        <p>${customRequest}</p>
+        <label class="request-text">Additional comments</label>
+        <p class="request-text">${customRequest}</p>
 
-        <form>
-          <button id="${orderObj.id}-btn-confirm" class="btn-submit" type="button">Order Complete</button>
+        <form class="request-text">
+          <button id="${orderObj.id}-btn-confirm" class="btn-fulfilled" type="button">Order Complete</button>
 
         </form>
       </section>`;
