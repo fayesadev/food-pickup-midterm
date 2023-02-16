@@ -1,3 +1,4 @@
+
 /********** GLOBAL VARIABLES **********/
 const userOrder = JSON.parse(localStorage.getItem("userOrder"));
 const d = new Date();
@@ -18,7 +19,7 @@ const createRequestElement = function (orderObj) {
           <h3>${name}</h3>
           <h3>${orderTime}</h3>
         </header>
-        <ul>
+        <ul style="list-style: none;" class="request-text">
           ${meals}
         </ul>
         <label>Additional comments</label>
@@ -42,11 +43,11 @@ const createRequestElement = function (orderObj) {
 };
 
 
-
 /*********** ORDER REQUESTS **********/
 const addToProcessedOrders = (orderObj) => {
   const name = orderObj.name; //good
   const customRequest = orderObj.message;
+
   const meals = mealList(orderObj.order);
   console.log("foo bar");
   const markup = `
@@ -60,8 +61,10 @@ const addToProcessedOrders = (orderObj) => {
         </ul>
         <label>Additional comments</label>
         <p>${customRequest}</p>
+
         <form>
           <button id="${orderObj.id}-btn-confirm" class="btn-submit" type="button">Order Complete</button>
+
         </form>
       </section>`;
 
@@ -84,7 +87,6 @@ const mealList = function (mealObj) {
 };
 
 
-
 /********** PENDING ORDER REQUESTS SIDE BAR **********/
 // const loadRequest = function () {
 //   $.get("/restaurants", function () {
@@ -96,8 +98,9 @@ const mealList = function (mealObj) {
 
 
 /********** CURRENT ORDER DASHBOARD **********/
+
 //Renders current order request and appends to current-order-container
-const renderOrder = function (currentOrder) {
+const renderOrders = function (currentOrder) {
   for (let order of currentOrder) {
     const $order = createOrderElement(order);
     $("#current-orders-container").append($order);
@@ -105,8 +108,8 @@ const renderOrder = function (currentOrder) {
 };
 
 
-
 $(document).ready(function (event) {
   createRequestElement(userOrder);
   renderOrder(userOrder);
+
 });

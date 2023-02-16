@@ -1,11 +1,3 @@
-body {
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  color: #333333;
-  background-color: #FFF;
-}
-
 main {
   display: flex;
   flex-direction: row;
@@ -15,35 +7,69 @@ main {
 
 .requests {
   width: 30%;
+  height: 100%;
   max-width: 600px;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: #F7F7F7;
+  box-shadow: 0 4px 5px 3px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  margin: 1em;
 }
 
 .new-order-request {
   width: 100%;
-  padding: 2em;
-  margin: 2em;
-  background-color: #FFF;
-  border-radius: 5%;
+  min-width: 200px;
+  max-width: 600px;
+  padding-bottom: 2em;
+  display: flex;
+  flex-direction: column;
 }
 
 .new-order-request:hover {
-  box-shadow: 0 4px 5px 3px rgba(0, 0, 0, 0.2);
+  background-color: #ececec;
+  width: 100%;
+}
+
+.request-text {
+  padding-left: 2em;
+  padding-right: 2em;
+}
+
+.error {
+  color: red;
+  display: none;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+}
+
+form input {
+  height: 25px;
+  width: 50%;
+  font-size: 14px;
+}
+
+button {
+  width: 150px;
 }
 
 .orders {
-  width: 100%;
-  max-width: 720px;
-  padding: 2em;
+  width: 70vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 800px;
 }
 
 .current-order {
   width: 100%;
   padding: 2em;
-  border: 1px solid;
+  border-bottom: 2px solid;
 }
 
 header {
@@ -74,21 +100,32 @@ header {
   color: #fff;
 }
 
-.btn-submit:hover,
-.btn-submit:focus {
+.btn-submit:hover {
   opacity: 0.75;
 }
 
-form {
-  display: flex;
-  flex-direction: column;
-}
-
-form input {
-  height: 20px;
+.btn-fulfilled {
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-block;
+  padding: 9px 20px 8px;
+  margin-top: 30px;
   max-width: 50%;
+  min-height: 30px;
+  min-width: 10px;
+  outline: none;
+  overflow: hidden;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+  text-align: center;
+  width: 100%;
+  border-radius: 4px;
+  border-style: none;
+  background-color: #c55336;
+  color: #fff;
 }
 
-button {
-  width: 150px;
+.btn-fulfilled:hover {
+  opacity: 0.75;
 }
