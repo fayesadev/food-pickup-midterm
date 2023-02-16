@@ -102,7 +102,7 @@ img {
   font-size: 30px;
   margin-left: 24px;
   color:#bc4b30;
-
+  font-family: 'Special Elite', cursive;
   font-weight: 700;
 }
 
@@ -169,7 +169,7 @@ img {
 .meal-footer {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   padding: 10px 20px;
 }
