@@ -1,3 +1,5 @@
+const socket = io();
+
 // ---- SAMPLE DATA ----- //
 
 const u_id = {
@@ -111,16 +113,20 @@ function submitReview() {
 
 // ---- CLICK LISTENERS ---- //
 $(function () {
-  $("#order-duration-button").click(function () {
+  socket.on('sentTime', data => {
     $("#initial-order").slideUp();
     $("#order-estimate").slideDown();
-    createOrderEstimate(durationMin);
-  });
+    createOrderEstimate(data);
+  })
 
-  $("#order-complete-button").click(function () {
-    $("#order-complete").slideDown();
-    $("#order-estimate").slideUp();
-  });
+ socket.on('sentComplete', data => {
+  $("#order-complete").slideDown();
+  $("#order-estimate").slideUp();
+ })
+
+  // $("#order-complete-button").click(function () {
+    
+  // });
 
   $("#review").click(function () {
     const reviewForm = $(`
