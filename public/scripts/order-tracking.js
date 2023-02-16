@@ -1,44 +1,9 @@
 const socket = io();
 
-// ---- SAMPLE DATA ----- //
+// ---- REQUIRE IN ORDER ----- //
 
-const u_id = {
-  order: {
-    1: {
-      id: 1,
-      name: "Hamburger",
-      price: 10,
-      qty: 1,
-    },
-    3: {
-      id: 3,
-      name: "Fries",
-      price: 5,
-      qty: 1,
-    },
-    2: {
-      id: 2,
-      name: "Shake",
-      price: 15,
-      qty: 1,
-    },
-    4: {
-      id: 4,
-      name: "Beef Brisket",
-      price: 20,
-      qty: 2,
-    },
-  },
-  name: "robbie",
-  number: 1234566,
-  customRequest: "i dont like peanuts",
-};
+const userOrder = JSON.parse(localStorage.getItem("userOrder"));
 
-localStorage.setItem("u_id", JSON.stringify(u_id));
-
-const incomingData = JSON.parse(localStorage.getItem("u_id"));
-
-console.log(incomingData);
 
 // ---- STAR RATINGS ---- //
 
@@ -47,7 +12,7 @@ function ratingInput(currentStar) {
   const productId = currentStar.parentElement.getAttribute("data-productid");
   currentStar.setAttribute("data-clicked", "true");
 
-  incomingData.order[productId].rating = rating;
+  userOrder.order[productId].rating = rating;
 }
 
 // ---- ORDER STATUS FUNCTIONS ---- //
@@ -73,7 +38,7 @@ const createOrderEstimate = function (durationMin) {
 };
 
 const renderFoodRatings = function (data) {
-  let ratings = Object.values(u_id.order);
+  let ratings = Object.values(userOrder.order);
   for (const rating of ratings) {
     createRatingElement(rating);
   }
@@ -106,9 +71,9 @@ function submitReview() {
   $("#order-review").empty();
   $("#order-review").append(reviewThanks);
 
-  localStorage.setItem("incomingData", JSON.stringify(incomingData));
-  const outgoingData = JSON.parse(localStorage.getItem("incomingData"));
-  console.log(outgoingData);
+  // localStorage.setItem("incomingData", JSON.stringify(incomingData));
+  // const outgoingData = JSON.parse(localStorage.getItem("incomingData"));
+  // console.log(outgoingData);
 }
 
 // ---- CLICK LISTENERS ---- //
@@ -139,7 +104,7 @@ $(function () {
     `);
 
     $("#order-review").append(reviewForm);
-    renderFoodRatings(incomingData);
+    renderFoodRatings(userOrder);
     $("#order-review").append(submitReview);
     $("#order-complete").empty();
   });

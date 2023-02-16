@@ -17,7 +17,7 @@ const loadMeals = (foodCategory) => {
 //
 const renderMealList = (meals, foodCategory) => {
   $(`#${foodCategory}`).empty();
-  for (let i = 0; i <= 21; i++) {
+  for (let i = 0; i <= 8; i++) {
     // -----Only render meals if they have an image(NO 404) ----- //
     $.get(meals[i].img)
       .then(function(res) {
@@ -162,7 +162,6 @@ const updateCartTotal = () => {
 const updateCartQuantity = (id, numOfItems) => {
   const order = JSON.parse(localStorage.getItem('order'));
   order[id].qty = Number(numOfItems);
-  localStorage.setItem('order', JSON.stringify(order));
   updateCartTotal();
 };
 
@@ -233,10 +232,10 @@ $('.confirm').click(function() {
   // data includes userOrder object
   // conditional if success
   // catch error and send alert
-  $.post('/orderDb', data, function (res) {
-    console.log(data);
-    const order = JSON.parse(localStorage.getItem('order'));
-  })
+  // $.post('/orderDb', data, function (res) {
+  //   console.log(data);
+  //   const order = JSON.parse(localStorage.getItem('order'));
+  // })
 
   $.get('/sms/placed')
   socket.emit('newOrder', 'awesome!');
@@ -244,11 +243,7 @@ $('.confirm').click(function() {
   const seeOrderBtn = $(`#see-order`)[0];
   $(seeOrderBtn).show(100);
 
-
-
 });
-
-
 
 
 //LOAD MEALS

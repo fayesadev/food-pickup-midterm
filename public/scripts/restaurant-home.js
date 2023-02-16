@@ -1,89 +1,101 @@
 /********** GLOBAL VARIABLES **********/
+
 const userOrder = JSON.parse(localStorage.getItem("userOrder"));
 const d = new Date();
-
-const orderTime = d.toLocaleTimeString();
-
-
-
+const orderTime = d.toString();
 const socket = io();
+let uniqueId = 0;
 
+
+/********** APPEND ORDER REQUESTS **********/
+const existingOrders = JSON.parse(localStorage.getItem("orderList")) || [];
+
+const appendOrders = () => {
+  if (userOrder !== null) {
+    existingOrders.push(userOrder);
+  }
+  localStorage.setItem("orderList", JSON.stringify(existingOrders));
+
+  let arr = [];
+
+  existingOrders.forEach(i => {
+    const uid = `${i.name}-${i.tel}`;
+    if(arr.includes(uid)) return;
+
+    arr.push(uid);
+    uniqueId++;
+    createRequestElement(i, uniqueId);
+
+  })
+};
 
 /*********** PENDING ORDER REQUESTS **********/
 //Creates HTML markup of pending request with time estimate input form
-const createRequestElement = function (orderObj) {
-  console.log(orderObj);
+const createRequestElement = function (orderObj, id) {
   const name = orderObj.name;
   const customRequest = orderObj.message;
   const meals = mealList(orderObj.order);
 
   const markup = `
-    <section id="${orderObj.id}-order-request-container" class="new-order-request">
-        <header class="request-text">
+    <section id="${id}-order-request-container" class="new-order-request">
+        <header>
           <h3>${name}</h3>
           <h3>${orderTime}</h3>
         </header>
         <ul style="list-style: none;" class="request-text">
           ${meals}
         </ul>
-        <label class="request-text">Additional comments</label>
-        <p class="request-text">${customRequest}</p>
-        <form class="timeEstimate request-text">
-          <label for="timeEstimate">How long will this order take?</label>
-          <input id="${orderObj.id}-input" name="timeEstimate" placeholder="Enter Time Estimate (min)"></input>
-          <span id="error" class="error">Please enter a valid time</span>
-          <button id="${orderObj.id}-btn" class="btn-submit" type="button">Confirm Request</button>
+        <label>Additional comments</label>
+        <p>${customRequest}</p>
+        <form class="timeEstimate">
+          <label for="timeEstimate">How much time will this order take?</label>
+          <input id="${id}-input" name="timeEstimate" placeholder="Enter Time Estimate"></input>
+          <button id="${id}-btn" class="btn-submit" type="button">Confirm Request</button>
         </form>
       </section>`;
 
   $("#pending-requests-container").append(markup);
 
-  $(`#${orderObj.id}-btn`).click(function (e) {
-    const $input = $(`#${orderObj.id}-input`).val()
-    if (isNaN($input) || $input.length === 0) {
-      $('#error').slideDown().css("display", "flex").delay(2000).slideUp();
-      return;
-    }
-    addToProcessedOrders(userOrder);
+  $(`#${id}-btn`).click(function (e) {
+    if ($(`#${id}-input`).val().length === 0) return;
+    addToProcessedOrders(orderObj, id); 
     $("#initial-order").slideUp();
     $("#order-estimate").slideDown();
-    ($(`#${orderObj.id}-order-request-container`)).hide(100);
+    ($(`#${id}-order-request-container`)).hide(100);
 
-    socket.emit('time', $(`#${orderObj.id}-input`).val());
-    $.post('/sms/orderTime', {time: $(`#${orderObj.id}-input`).val()})
+    socket.emit('time', $(`#${id}-input`).val());
+    $.post('/sms/orderTime', {time: $(`#${id}-input`).val()})
   });
 };
 
 
 /*********** ORDER REQUESTS **********/
-const addToProcessedOrders = (orderObj) => {
+const addToProcessedOrders = (orderObj, id) => {
   const name = orderObj.name; //good
   const customRequest = orderObj.message;
-
   const meals = mealList(orderObj.order);
-  console.log("foo bar");
   const markup = `
-    <section id="${orderObj.id}-order-confirmed-container" class="current-order">
-      <header class="request-text">
+    <section id="${id}-order-confirmed-container" class="new-order-request">
+      <header>
         <h3>${name}</h3>
         <h3>${orderTime}</h3>
       </header>
-        <ul style="list-style: none;" class="request-text">
+        <ul>
           ${meals}
         </ul>
-        <label class="request-text">Additional comments</label>
-        <p class="request-text">${customRequest}</p>
+        <label>Additional comments</label>
+        <p>${customRequest}</p>
 
-        <form class="request-text">
-          <button id="${orderObj.id}-btn-confirm" class="btn-fulfilled" type="button">Order Complete</button>
+        <form>
+          <button id="${id}-btn-confirm" class="btn-submit" type="button">Order Complete</button>
 
         </form>
       </section>`;
 
       $("#current-orders-container").append(markup);
-
-      $(`#${orderObj.id}-btn-confirm`).click(function (e) {
-        ($(`#${orderObj.id}-order-confirmed-container`)).hide(100);
+      
+      $(`#${id}-btn-confirm`).click(function (e) {
+        ($(`#${id}-order-confirmed-container`)).hide(100);
 
         socket.emit('complete', 'awesome!');
         $.get('/sms/completed');
@@ -102,29 +114,21 @@ const mealList = function (mealObj) {
 };
 
 
-/********** PENDING ORDER REQUESTS SIDE BAR **********/
-// const loadRequest = function () {
-//   $.get("/restaurants", function () {
-//     // Hardcoded loadRequest with dummy newRequest data to see it on the page
-//     renderRequest(userOrder);
-//   });
-// };
 
-
-
-/********** CURRENT ORDER DASHBOARD **********/
-
-//Renders current order request and appends to current-order-container
-const renderOrders = function (currentOrder) {
-  for (let order of currentOrder) {
-    const $order = createOrderElement(order);
-    $("#current-orders-container").append($order);
-  }
-};
-
+// appendOrderHistory(userOrder);
 
 $(document).ready(function (event) {
-  createRequestElement(userOrder);
-  renderOrder(userOrder);
-  socket.emit('sentNewOrder', 'awesome!');
+  // Add all existing orders on page load
+  appendOrders();
+
+  // Add individual new orders whenever cart is submitted
+  
+  socket.on('sentNewOrder', () => {
+    uniqueId++;
+    const newOrder = JSON.parse(localStorage.getItem("userOrder"));
+    createRequestElement(newOrder, uniqueId);
+  });
 });
+
+
+
