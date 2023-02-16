@@ -1,9 +1,8 @@
-
 /********** GLOBAL VARIABLES **********/
 const userOrder = JSON.parse(localStorage.getItem("userOrder"));
 const d = new Date();
 const orderTime = d.toString();
-
+const socket = io();
 
 /*********** PENDING ORDER REQUESTS **********/
 //Creates HTML markup of pending request with time estimate input form
@@ -39,6 +38,9 @@ const createRequestElement = function (orderObj) {
     $("#initial-order").slideUp();
     $("#order-estimate").slideDown();
     ($(`#${orderObj.id}-order-request-container`)).hide(100);
+
+    socket.emit('time', $(`#${orderObj.id}-input`).val());
+    $.post('/sms/orderTime', {time: $(`#${orderObj.id}-input`).val()})
   });
 };
 
@@ -72,6 +74,9 @@ const addToProcessedOrders = (orderObj) => {
       
       $(`#${orderObj.id}-btn-confirm`).click(function (e) {
         ($(`#${orderObj.id}-order-confirmed-container`)).hide(100);
+
+        socket.emit('complete', 'awesome!');
+        $.get('/sms/completed');
       });
 }
 
@@ -111,5 +116,5 @@ const renderOrders = function (currentOrder) {
 $(document).ready(function (event) {
   createRequestElement(userOrder);
   renderOrder(userOrder);
-
+  socket.emit('sentNewOrder', 'awesome!');
 });
