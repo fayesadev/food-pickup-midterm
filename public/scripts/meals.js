@@ -17,14 +17,16 @@ const loadMeals = (foodCategory) => {
 //
 const renderMealList = (meals, foodCategory) => {
   $(`#${foodCategory}`).empty();
-  for (const meal of meals) {
+  for (let i = 0; i <= 21; i++) {
     // -----Only render meals if they have an image(NO 404) ----- //
-    $.get(meal.img)
+    $.get(meals[i].img)
       .then(function(res) {
-        createMealItem(meal, foodCategory);
+        createMealItem(meals[i], foodCategory);
       })
       .catch(function(err) {
-        // console.log(err);
+        if (i !== 0) {
+          i--;
+        }
       });
   }
 };
@@ -40,12 +42,14 @@ const createMealItem = (meal, foodCategory) => {
   const mealWords = meal.id.replace(/-/g, " ").split(" ");
   const packIndex = mealWords.indexOf("pack");
   const kitIndex = mealWords.indexOf("kit");
+
   if (packIndex !== -1) {
     mealWords.splice(packIndex, mealWords.length - packIndex);
   }
   if (kitIndex !== -1) {
     mealWords.splice(kitIndex, mealWords.length - kitIndex);
   }
+
   const mealName = mealWords
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
@@ -72,6 +76,7 @@ const createMealItem = (meal, foodCategory) => {
       </footer>
     </article>
   `);
+
   $(`#${foodCategory}`).append(mealItem);
 
   //  ----- When specific meal is clicked, add it to order -----//
@@ -110,6 +115,7 @@ const createCartElement = (id) => {
         </div>
       `
   );
+
   $('.cart-items').append($cartItem);
   //----- add event listener to remove item from cart and local storage updates -----//
   $(`#remove-cart-${order[id].id}`)[0].addEventListener('click', (e) => {
@@ -139,6 +145,7 @@ const updateCartTotal = () => {
   const total = Object.values(order).reduce((acc, cur) => {
     return acc + (cur.price * cur.qty);
   }, 0);
+
   $('.cart-total-price').html(total.toFixed(2));
 
   if ($('.cart-items').children().length === 0) {
@@ -166,14 +173,13 @@ const updateCartQuantity = (id, numOfItems) => {
 //
 const removeItemFromOrder = (item) => {
   item.remove(); //remove html row from browser
-
   const order = JSON.parse(localStorage.getItem('order'));
+
   const id = $(item).attr('id').split('.')[1];
   delete order[id];
+
   localStorage.setItem('order', JSON.stringify(order));
   updateCartTotal();
-
-  //will update item in the cart
 };
 
 
@@ -183,6 +189,7 @@ const removeItemFromOrder = (item) => {
 $('.btn-checkout').click(function() {
 
   const order = JSON.parse(localStorage.getItem('order'));
+
   //----- count number of order items is > 0 -----//
   const numOfItems = Object.values(order).reduce((acc, cur) => {
     return acc + (cur.qty);
@@ -194,6 +201,8 @@ $('.btn-checkout').click(function() {
   $(form).show(100);
 });
 
+
+
 //
 // CANCEL CHECKOUT
 //
@@ -201,6 +210,8 @@ $('.cancel').click(function() {
   const form = $(`#confirmation-form`)[0];
   $(form).hide(100);
 });
+
+
 
 //
 // CONFIRM CHECKOUT
@@ -217,27 +228,36 @@ $('.confirm').click(function() {
   }
  
   localStorage.setItem("userOrder", JSON.stringify(userOrder));
- 
+
+  // send query to API
+  // data includes userOrder object
+  // conditional if success
+  // catch error and send alert
+  $.post('/orderDb', data, function (res) {
+    console.log(data);
+    const order = JSON.parse(localStorage.getItem('order'));
+  })
+
+  $.get('/sms/placed')
+  socket.emit('newOrder', 'awesome!');
   //-----If the customer returns to the order page, the order button will be visible -----//
   const seeOrderBtn = $(`#see-order`)[0];
   $(seeOrderBtn).show(100);
-  
 
-  //need post method
-  //post(userinfo, order) to get order const order = JSON.parse(localStorage.getItem('order'));
+
+
 });
 
 
-// $('.btn-btn-checkout').click(() => proceedToCheckOut());
 
-//LOAD MEALS (1)
+
+//LOAD MEALS
 $(document).ready(() => {
   const order = {};
   localStorage.setItem('order', JSON.stringify(order));
 
-  loadMeals("brisket");
+  loadMeals("our-foods");
   loadMeals("fried-chicken");
   loadMeals("sandwiches");
 });
-
 

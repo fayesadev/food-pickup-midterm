@@ -13,7 +13,7 @@ CREATE TABLE meals (
 
 CREATE TABLE orders (
   id SERIAL PRIMARY KEY NOT NULL,
-  customer INTEGER REFERENCES customers(id) ON DELETE CASCADE,
+  customer_id INTEGER REFERENCES customers(id) ON DELETE CASCADE,
   est_completion_time SMALLINT,
   order_time DEFAULT CURRENT_TIMESTAMP,
   is_fulfilled BOOLEAN NOT NULL DEFAULT false,
