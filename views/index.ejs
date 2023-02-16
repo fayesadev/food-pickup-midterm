@@ -23,7 +23,7 @@
   <nav>
     <span id="logo">MeatHub</span>
     <span id="see-order">
-      <a src="#">View Order</a>
+      <a src="/order-status">View Order</a>
       <div id="bouncing-nav-arrow"><i class="fa-solid fa-angles-right"></i></div>
     </span>
   </nav>
@@ -86,14 +86,14 @@
 
   <!--Confirm order form starts-->
 
-  <form id="confirmation-form" class="order-form" method="post" action="contact-form-process.php">
+  <form id="confirmation-form" class="order-form" action="/order-status" method="get">
     <div class="form-header">
       <h2>Confirm Details for Pickup</h2>
     </div>
     <div>
-      <label for="Name" class="order-label">Your name</label>
+      <label for="name" class="order-label">Your name</label>
       <div class="order-input-group">
-        <input type="text" id="Name" name="Name" class="order-input" placeholder="Jane Smith" required>
+        <input type="text" id="name" name="name" class="order-input" placeholder="Jane Smith" required>
       </div>
     </div>
 
@@ -105,9 +105,9 @@
     </div>
 
     <div>
-      <label for="Message" class="order-label">Special Instructions:</label>
+      <label for="message" class="order-label">Special Instructions:</label>
       <div class="order-input-group">
-        <textarea id="Message" name="Message" class="order-input" rows="6" maxlength="1000"
+        <textarea id="message" name="message" class="order-input" rows="6" maxlength="1000"
           placeholder="Allergies, dellivery instructions, etc."></textarea>
       </div>
     </div>
@@ -121,6 +121,7 @@
 </main>
   <!--external scripts-->
   <script src="./scripts/cart.js"></script>
+  <script src="./scripts/restaurant-home.js"></script>
   <script src="./scripts/meals.js"></script>
 </body>
 

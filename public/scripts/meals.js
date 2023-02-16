@@ -206,11 +206,22 @@ $('.cancel').click(function() {
 // CONFIRM CHECKOUT
 //
 $('.confirm').click(function() {
-  if ($('#Name').val().length === 0 || $('#tel').val().length === 0) return;
-
-  //-----If the customer returns to the order page, the see order button will be visible -----//
+  if ($('#name').val().length === 0 || $('#tel').val().length === 0) return;
+  
+  //----- proceed to checkout if number of order items is > 0 -----//
+  const userOrder = {
+    order: JSON.parse(localStorage.getItem('order')),
+    name: $('#name').val(),
+    tel: $('#tel').val(),
+    message: $('#message').val()
+  }
+ 
+  localStorage.setItem("userOrder", JSON.stringify(userOrder));
+ 
+  //-----If the customer returns to the order page, the order button will be visible -----//
   const seeOrderBtn = $(`#see-order`)[0];
   $(seeOrderBtn).show(100);
+  
 
   //need post method
   //post(userinfo, order) to get order const order = JSON.parse(localStorage.getItem('order'));

@@ -1,160 +1,104 @@
-/********** SAMPLE DATA OBJECTS **********/
 
-const newRequest =
-  [{
-    id: 1,
-    order: {
-      Dummy: 1,
-      MonkeyFuzz: 2,
-      FuzzyMonk: 1,
-    },
-    name: "Donald Duck",
-    number: 7801234567,
-    order_time: "1:15pm",
-    customRequest: "No peanuts pls",
-    est_completion_time: 25,
-  }];
+/********** GLOBAL VARIABLES **********/
+const userOrder = JSON.parse(localStorage.getItem("userOrder"));
+const d = new Date();
+const orderTime = d.toString();
 
-const orders = [
-  {
-    id: 1,
-    order: {
-      "Roast Beef": 1,
-      "Chicken Club": 2,
-      "Philly Cheesesteak": 1,
-    },
-    name: "Robbie",
-    number: 7801234567,
-    order_time: "1:15pm",
-    customRequest: "No peanuts pls",
-    est_completion_time: 30,
-  },
-  {
-    id: 2,
-    order: {
-      "Roast Beef": 2,
-      "Chicken Club": 2,
-      "Philly Cheesesteak": 2,
-    },
-    name: "Faye",
-    number: 7801234567,
-    order_time: "1:15pm",
-    customRequest: "No peanuts pls",
-    est_completion_time: 15,
-  },
-  {
-    id: 3,
-    order: {
-      "Roast Beef": 1,
-      "Chicken Club": 2,
-      "Philly Cheesesteak": 3,
-    },
-    name: "Lauren",
-    number: 7801234567,
-    order_time: "1:15pm",
-    customRequest: "No peanuts pls",
-    est_completion_time: 12,
-  },
-];
 
-/***********  HELPER FUNCTIONS **********/
-
-//Returns HTML markup of meal and quantity list passed in an object
-const mealList = function (mealObj) {
-  let string = "";
-  for (let meal in mealObj) {
-    string += `<li class="request-text">${mealObj[meal]}x ${meal}</li>`;
-  }
-  return string;
-};
-
-//Encodes string to become safe HTML and prevent XSS
-/*const escape = function(str) {
-    let text = document.createElement("text");
-    text.appendChild(document.createTextNode(str));
-    return text.innerHTML;
-  };*/
-
-/********** PENDING ORDER REQUESTS SIDE BAR **********/
-
+/*********** PENDING ORDER REQUESTS **********/
 //Creates HTML markup of pending request with time estimate input form
 const createRequestElement = function (orderObj) {
+  console.log(orderObj);
   const name = orderObj.name;
-  const orderTime = orderObj.order_time;
-  const customRequest = orderObj.customRequest;
+  const customRequest = orderObj.message;
   const meals = mealList(orderObj.order);
 
   const markup = `
-    <section data-id=${orderObj.id} class="new-order-request">
-        <header class="request-text">
+    <section id="${orderObj.id}-order-request-container" class="new-order-request">
+        <header>
           <h3>${name}</h3>
           <h3>${orderTime}</h3>
         </header>
         <ul style="list-style: none;" class="request-text">
           ${meals}
         </ul>
-        <label class="request-text">Additional comments</label>
-        <p class="request-text">${customRequest}</p>
-        <form class="timeEstimate request-text">
-          <label for="timeEstimate">How long will this order take?</label>
-          <input name="timeEstimate" placeholder="Enter time estimate in minutes"></input>
-          <span class="error">Please enter a valid time</span>
-          <button class="btn-submit" type="submit">Confirm Request</button>
+        <label>Additional comments</label>
+        <p>${customRequest}</p>
+        <form class="timeEstimate">
+          <label for="timeEstimate">How much time will this order take?</label>
+          <input id="${orderObj.id}-input" name="timeEstimate" placeholder="Enter Time Estimate"></input>
+          <button id="${orderObj.id}-btn" class="btn-submit" type="button">Confirm Request</button>
         </form>
       </section>`;
 
-  return markup;
+  $("#pending-requests-container").append(markup);
+
+  $(`#${orderObj.id}-btn`).click(function (e) {
+    if ($(`#${orderObj.id}-input`).val().length === 0) return;
+    addToProcessedOrders(userOrder); 
+    $("#initial-order").slideUp();
+    $("#order-estimate").slideDown();
+    ($(`#${orderObj.id}-order-request-container`)).hide(100);
+  });
 };
 
-//Takes in array of order request objects and renders pending order request and appends to pending-requests-container
-const renderRequests = function (orders) {
-  for (let order of orders) {
-    const $request = createRequestElement(order);
-    $("#pending-requests-container").append($request);
-  }
-};
 
-// const loadRequest = function () {
-//   $.get("/restaurants", function () {
-//     // Hardcoded loadRequest with dummy newRequest data to see it on the page
-//     renderRequest(newRequest);
-//   });
-// };
+/*********** ORDER REQUESTS **********/
+const addToProcessedOrders = (orderObj) => {
+  const name = orderObj.name; //good
+  const customRequest = orderObj.message;
 
-/********** CURRENT ORDER DASHBOARD **********/
-
-//Creates HTML markup of current order with order-fulfilled form button
-const createOrderElement = function (orderObj) {
-  const name = orderObj.name;
-  // const number = customer.phone_number;
-  const timeEstimate = orderObj.est_completion_time;
-  const orderTime = orderObj.order_time;
-  const customRequest = orderObj.customRequest;
   const meals = mealList(orderObj.order);
-
+  console.log("foo bar");
   const markup = `
-    <section data-id=${orderObj.id} class="current-order">
-        <header>
-          <h3>${name}</h3>
-          <div>
-          <h3>${orderTime}</h3>
-          <h4>${timeEstimate} min</h4>
-          </div>
-        </header>
+    <section id="${orderObj.id}-order-confirmed-container" class="new-order-request">
+      <header>
+        <h3>${name}</h3>
+        <h3>${orderTime}</h3>
+      </header>
         <ul>
           ${meals}
         </ul>
         <label>Additional comments</label>
         <p>${customRequest}</p>
-        <form class="completedOrder">
-          <button type="submit" class="btn-fulfilled">Order Fulfilled!</button>
+
+        <form>
+          <button id="${orderObj.id}-btn-confirm" class="btn-submit" type="button">Order Complete</button>
+
         </form>
       </section>`;
 
-  return markup;
+      $("#current-orders-container").append(markup);
+      
+      $(`#${orderObj.id}-btn-confirm`).click(function (e) {
+        ($(`#${orderObj.id}-order-confirmed-container`)).hide(100);
+      });
+}
+
+//Returns HTML markup of meal and quantity list passed in an object (used for pending orders and processed orders)
+const mealList = function (mealObj) {
+  let string = "";
+  const mealList = Object.values(mealObj);
+
+  for (const meal of mealList) {
+    string += `<li>${meal.id} x ${meal.qty}</li>`;
+  }
+  return string;
 };
 
-//For CSS testing and styling  purposes
+
+/********** PENDING ORDER REQUESTS SIDE BAR **********/
+// const loadRequest = function () {
+//   $.get("/restaurants", function () {
+//     // Hardcoded loadRequest with dummy newRequest data to see it on the page
+//     renderRequest(userOrder);
+//   });
+// };
+
+
+
+/********** CURRENT ORDER DASHBOARD **********/
+
 //Renders current order request and appends to current-order-container
 const renderOrders = function (currentOrder) {
   for (let order of currentOrder) {
@@ -163,53 +107,9 @@ const renderOrders = function (currentOrder) {
   }
 };
 
-//Appends one order to current order contianer passed in a single object array
-const appendOrder = function(orderObj) {
-  const order = orderObj[0];
-  $("#current-orders-container").append(createOrderElement(order));
-}
 
-/********** JQUERY **********/
+$(document).ready(function (event) {
+  createRequestElement(userOrder);
+  renderOrder(userOrder);
 
-$(document).ready(function(event) {
-  renderRequests(orders);
-  renderOrders(orders);
-
-  // Dummy button to append new requests to left contianer
-  $("#dummybutton").click(function() {
-    renderRequests(newRequest);
-  });
-
-  $(".requests").on("submit", ".timeEstimate", function(event) {
-      event.preventDefault();
-
-      if ($('input').val().length === 0) {
-        event.stopImmediatePropagation();
-        $('.error').slideDown().css("display", "flex").delay(2000).slideUp();
-        return;
-      }
-      alert(`You submitted ${$('input').val()} minutes`);
-      // alert($(this).serialize());
-      $(this).parent().remove();
-      appendOrder(newRequest);
-    }
-  );
-
-  $(".orders").on("submit", ".completedOrder", function(event) {
-    event.preventDefault();
-    alert("you fulfilled this order!");
-
-    $(this).parent().remove();
-  })
 });
-
-// Copied Tweeter formatting to submit time estimate
-// $('#time-estimate').submit(function(event) {
-//   event.preventDefault();
-//   const $text = $(this).serialize();
-//   console.log($text);
-//   $.post('/restaurants/requests', $text)
-//   .then(()=>{
-//     $('new-order-request').empty();
-//   })
-// });
