@@ -83,25 +83,29 @@ img {
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   height: auto;
   //////
-
-
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: space-around; */
 }
 
 .meal-header {
   //////
   display: flex;
+  flex-direction: column;
 
 }
 
 .meal-image {
-  max-height: 80px;
-  //////
+  max-height: auto;
+
 }
 
 .meal-footer {
-  // display: flex;
-  // align-items: center;
-  // justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .addtocart {

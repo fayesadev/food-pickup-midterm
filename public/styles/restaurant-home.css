@@ -2,13 +2,12 @@ main {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  font-family: sans-serif;
+  font-family: "Roboto", sans-serif;
   height: 100vw;
-  background-color: #c55336;
 }
 
 h1 {
-  font-family: "Arvo", serif;
+  font-family: "Bebas Neue", cursive;
   font-weight: 600;
   font-size: 2rem;
   color: #3c2525;

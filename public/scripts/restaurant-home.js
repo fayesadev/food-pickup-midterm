@@ -26,7 +26,7 @@ const createRequestElement = function (orderObj) {
         <p class="request-text">${customRequest}</p>
         <form class="timeEstimate request-text">
           <label for="timeEstimate">How long will this order take?</label>
-          <input id="${orderObj.id}-input" name="timeEstimate" placeholder="Enter Time Estimate"></input>
+          <input id="${orderObj.id}-input" name="timeEstimate" placeholder="Enter Time Estimate (min)"></input>
           <span id="error" class="error">Please enter a valid time</span>
           <button id="${orderObj.id}-btn" class="btn-submit" type="button">Confirm Request</button>
         </form>
@@ -35,7 +35,8 @@ const createRequestElement = function (orderObj) {
   $("#pending-requests-container").append(markup);
 
   $(`#${orderObj.id}-btn`).click(function (e) {
-    if ($(`#${orderObj.id}-input`).val().length === 0) {
+    const $input = $(`#${orderObj.id}-input`).val()
+    if (isNaN($input) || $input.length === 0) {
       $('#error').slideDown().css("display", "flex").delay(2000).slideUp();
       return;
     }

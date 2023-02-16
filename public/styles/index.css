@@ -38,20 +38,57 @@ img {
   width: 100%;
   height: 50vh;
 
-  background: url(/images/cover-photo.png) rgba(33, 19, 13, 0.3);
+  background: url('/images/ezgif.com-video-to-gif.gif');
+  /* background: url(/images/cover-photo.png) rgba(33, 19, 13, 0.3); */
   background-repeat: no-repeat;
   background-blend-mode: multiply;
   background-position: center center;
   background-size: cover;
 
-  font-size: 3rem;
-  font-family: 'Arvo', serif;;
-  font-weight: 600;
+  font-size: 4rem;
+  font-family: 'Bebas Neue', cursive;
+  /* font-family: 'Arvo', serif; */
+  /* font-weight: 600; */
   letter-spacing: 1px;
-  color:#f2c349;
+  color:#ffffff;
+  /* color:#f2c349; */
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.page-header h2 {
+  position: relative;
+  color: #ffffff;
+  font-size: 8rem;
+  line-height: 0.9;
+  text-align: center;
+}
+
+.animate__animated.animate__fadeInUp {
+  --animate-duration: 2s;
+}
+
+.page-header::before {
+  content: "";
+  position: absolute;
+  height: 50vh;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  background-color: rgba(0,0,0,0.25);
+}
+
+.section-heading {
+  font-family: 'Special Elite', cursive;
+}
+
+.section-heading span {
+  color: #bc4b30;
+}
+.section-heading hr{
+  color: #bc4b30;
 }
 
 .home {
@@ -62,8 +99,9 @@ img {
 .food-category {
   font-size: 30px;
   margin-left: 24px;
-  color:#c55336;
-  font-family: 'Rancho', cursive;
+  color:#bc4b30;
+
+  font-weight: 700;
 }
 
 .grid-container {
@@ -82,26 +120,27 @@ img {
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   height: auto;
-  //////
-
-
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  /* justify-content: space-around; */
 }
 
 .meal-header {
-  //////
   display: flex;
-
+  flex-direction: column;
+  align-items: center;
 }
 
 .meal-image {
-  max-height: 80px;
-  //////
+  max-height: auto;
 }
 
 .meal-footer {
-  // display: flex;
-  // align-items: center;
-  // justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .addtocart {
