@@ -8,8 +8,8 @@
 const express = require("express");
 const router = express.Router();
 
-
-
-
+router.get("/order-status", (req, res) => {
+  res.render("order-status");
+});
 
 module.exports = router;
