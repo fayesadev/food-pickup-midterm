@@ -1,11 +1,39 @@
+.page-header2 {
+  top: -56px;
+  width: 100%;
+  height: 32vh;
+  background: url(/images/cover-photo.png) rgba(33, 19, 13, 0.3);
+  background-repeat: no-repeat;
+  background-blend-mode: multiply;
+  background-position: center center;
+  background-size: cover;
+  font-size: 3rem;
+  font-family: "Bebas Neue";
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #f2c349;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-title {
+  position: relative;
+  color: #ffffff;
+  font-size: 6rem;
+  line-height: 0.9;
+  text-align: center;
+}
+
 .content-container {
   background-color: rgb(60, 37, 37);
   width: 90vw;
   margin: 30px auto;
-  border: solid grey 3px;
+  border: solid black 1px;
   border-radius: 10px;
   height: 60vh;
   position: relative;
+  box-shadow: 0 4px 5px 3px rgba(0, 0, 0, 0.3);
 }
 
 .content {
@@ -23,16 +51,24 @@
   border-radius: 4px;
   text-decoration: none;
   color: white;
+  font-family: "Roboto";
+  font-size: 24px;
 }
 
 .home-button:hover {
   background-color: darkgrey;
 }
 
+#logo {
+  font-family: "Special Elite";
+}
+
 .pickup-alert {
   text-align: center;
-  font-size: 30px;
+  font-size: 64px;
   color: white;
+  font-family: "Bebas Neue";
+  margin-bottom: 10px;
 }
 
 .progress-bar {
@@ -43,6 +79,7 @@
   background-color: #252525;
   border-radius: 1.5rem;
   color: white;
+  font-family: "Roboto";
 }
 
 .progress-bar::before {
@@ -66,9 +103,9 @@
   background: rgb(175, 147, 85);
   border-radius: 50%;
   margin: auto;
-  height: 80px;
-  width: 80px;
-  box-shadow: 0 0 0 0 rgb(175, 147, 85);
+  height: 100px;
+  width: 100px;
+  box-shadow: 0 0 0 0 #af9355;
   transform: scale(1);
   animation: pulse 2s infinite;
 }
@@ -101,11 +138,12 @@
 }
 
 .button {
-  font-size: 16px;
+  font-size: 24px;
   margin: 20px auto;
   padding: 15px;
   display: block;
   text-align: center;
+  font-family: "Roboto";
 }
 
 .review-page {
@@ -123,6 +161,14 @@
   font-size: 36px;
 }
 
+#review {
+  font-size: 24px;
+}
+
+#submit-review {
+  font-size: 24px;
+}
+
 .food-item {
   display: flex;
   justify-content: space-between;
@@ -135,11 +181,9 @@
 }
 
 .ratings-wrapper {
-  border: thin solid #555;
   display: inline-block;
   margin: 0 10px;
   padding: 0 10px;
-  background-color: rgb(75, 65, 65);
 }
 
 .ratings {
@@ -150,7 +194,7 @@
 .ratings span {
   cursor: pointer;
   transition: color 0.2s, transform 0.2s;
-  font-size: 25px;
+  font-size: 45px;
   padding-bottom: 5px;
 }
 

@@ -84,6 +84,7 @@ img {
 
 .section-heading {
   font-family: 'Special Elite', cursive;
+  margin-top: 50px;
 }
 
 .section-heading span {
@@ -95,30 +96,27 @@ img {
 
 .home {
   display: flex;
-  margin-left: 20px;
+  height: auto;
 }
 
 .food-category {
-  font-size: 30px;
-  margin-left: 24px;
-  color:#bc4b30;
-  font-family: 'Special Elite', cursive;
+  font-size: 50px;
+  margin-top: 80px;
+  margin-left: 50px;
+  color:#313131;
+  letter-spacing: 2px;
+  font-family: 'Bebas Neue', cursive;
   font-weight: 700;
 }
 
 .grid-container {
-  /* margin-left: 20px; */
   display: grid;
   position: relative;
   grid-template-columns: repeat( auto-fit, minmax(350px,1fr));
   grid-gap: 20px 40px;
   padding: 0;
-
-  /* grid-template-columns: 20vw 20vw 20vw; */
-  /* grid-template-rows: 25vw 25vw 25vw; */
-  /* grid-auto-rows: 23vw;
-  row-gap: 1rem;
-  column-gap: 1rem; */
+  margin-left: 30px;
+  margin-right: 30px;
 }
 
 .meal{
@@ -127,22 +125,21 @@ img {
   grid-template-rows: auto 1fr;
   border-radius: 15px;
   box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  background-color: rgb(243, 243, 243);
   margin: 0 20px;
 }
 
-/* .meal {
-  padding: 1rem;
-  font-size: 15px;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-} */
-/* Get rid of texas monthlys 1 Bbq brisket */
+.grow {
+  transition: all .2s ease-in-out;
+}
+
+.grow:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 5px 3px rgba(0,0,0,.2);
+  z-index: 1;
+}
+
+
 .meal-header {
   display: flex;
   flex-direction: column;
@@ -151,27 +148,26 @@ img {
   font-size: 18px;
   width: 100%;
   overflow-wrap: break-word;
+  text-align: center;
 }
 
 .meal-image {
-  /* height: auto;
-  width: 80%;
-  object-fit: fill;
-  max-height: auto; */
-
   position: relative;
   width: 100%;
+  min-width: 100%;
   object-fit: fill;
-  z-index: 1;
   border-radius: 15px 15px 0 0;
 }
 
 .meal-footer {
+  height: 70px;
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: flex-end;
   justify-content: space-between;
   padding: 10px 20px;
+  padding-bottom: 10px;
+  font-size: 18px;
 }
 
 .addtocart {
@@ -179,25 +175,31 @@ img {
   padding: 0.4rem;
   border-radius: 3px;
   border: none;
-  font-size: 8px;
+  font-size: 15px;
   position: relative;
-  background:#c55336;
+  background:#bc4b30;
   color:#fbf3db;
   cursor: pointer;
-  height: 25px;
-  width: 40%;
+  height: auto;
+  width: 50%;
+}
+
+.addtocart:hover {
+  background-color: #a54128;
 }
 
 .fa-cart-plus {
-  background:#c55336;
+  background:#bc4b30;
 }
 
 .meal-name {
-  font-size: 17px;
+  font-size: 20px;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .price {
-  margin-top: 20px;
   display: flex;
 }
 
@@ -206,27 +208,23 @@ img {
   width: 33vw;
   min-height: 75vh;
   color: rgb(51,51,51);
-  font-size: 15px;
-  background-color: #FFF;
+  font-size: 18px;
+  /* background-color: #eae9e9; */
+  background-color: #00000000;
   border-radius: 10px;
   padding: 2em;
   margin-left: auto;
   right: 0;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   display: none;
+  /* position: -webkit-sticky; */
+  position: sticky;
+  top: 0;
 }
-
-/* .cart-container::before {
-  content: "";
-  position: absolute;
-  min-height: 75vh;
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  left: 0px;
-  background-color: rgba(0,0,0,0.25);
-} */
-
+.cart-container h2 {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 36px;
+}
 cart-column {
   display: flex;
   align-items: center;
@@ -237,9 +235,12 @@ cart-column {
 .cart-row {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  /* padding: 10px 0; */
+  align-items: flex-start;
   width: 100%;
+}
+
+.cart-row span {
+  font-weight: light;
 }
 
 .cart-col-1 {
@@ -315,13 +316,15 @@ cart-column {
   width: 100%;
   border-radius: 4px;
   border-style: none;
-  background-color: #4b4e4c;
-  color:#fbf3db;
+  /* background-color: #4b4e4c; */
+  background-color: #4e7077;
+  color:#FFF;
 }
 
 .btn-checkout:hover,
 .btn-checkout:focus {
-  background-color: #62897e
+  /* background-color: #62897e */
+  background-color: #3c585f;
 }
 
 .btn-danger {
@@ -360,19 +363,32 @@ main {
   align-items: center;
 }
 
+.overlay {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #00000075;
+  display: none;
+}
+
 #confirmation-form {
   display: none;
 }
+
 .order-form {
-  background-color:#fbf3db;
-  position: absolute;
-  margin-left: auto;
-  margin-right: auto;
+  background-color: #f7f7f7;
+  z-index: 100;
+  position: fixed;
+  left: 25vw;
+  top: 25vw;
   margin-top: -22%;
-padding: 20px;
-width: 50%;
-height: 100%;
-box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+  padding: 2em;
+  width: 50%;
+  height: 90%;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+  border-radius: 15px;
 }
 
 .order-body {
@@ -382,7 +398,7 @@ box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
   line-height: 1.5;
   color: #212529;
   text-align: left;
-  background-color:#fbf3db;
+  background-color:#fafafa;
   padding: 30px;
   padding-bottom: 10px;
   border: 1px solid #ced4da;
@@ -405,7 +421,7 @@ box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
   padding: 0.375rem 0.75rem;
   line-height: 1.5;
   color: #495057;
-  background-color:#fbf3db;
+  background-color:#ffffff;
   border: 1px solid #ced4da;
   outline: none;
   border-radius: 0.25rem;
@@ -434,14 +450,18 @@ label.order-label {
 
 .cancel {
   margin-right: .5em;
-  background-color: #D3D3D3;
+  background-color: #939393;
   font-weight: 400;
 }
 
 .confirm {
   margin-left: .5em;
-  background-color:#c55336;
+  background-color:#bc4b30;
   font-weight: 400;
+}
+
+.confirm:hover {
+  background-color: #903822;
 }
 
 .underline {

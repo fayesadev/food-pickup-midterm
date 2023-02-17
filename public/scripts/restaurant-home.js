@@ -2,32 +2,47 @@
 
 const userOrder = JSON.parse(localStorage.getItem("userOrder"));
 const d = new Date();
-const orderTime = d.toString();
+const orderTime = d.toLocaleTimeString();
 const socket = io();
 let uniqueId = 0;
-
 
 /********** APPEND ORDER REQUESTS **********/
 const existingOrders = JSON.parse(localStorage.getItem("orderList")) || [];
 console.log('existingOrders', existingOrders);
 
 const appendOrders = () => {
+  // Check to see if userOrder is null AND it doesn't exist in existingOrders already
+  let exists = false;
   if (userOrder !== null) {
-    existingOrders.push(userOrder);
+    existingOrders.forEach((order) => {
+      const uid = `${order.name}-${order.tel}`;
+      const userOrderId = `${userOrder.name}-${userOrder.tel}`;
+      if (uid === userOrderId) {
+        exists = true;
+      }
+    });
+    if (exists === false) {
+      existingOrders.push(userOrder);
+      localStorage.setItem("orderList", JSON.stringify(existingOrders));
+    }
   }
-  localStorage.setItem("orderList", JSON.stringify(existingOrders));
 
-  let arr = [];
+// Chcek to see if the existing order has already been completed
+  existingOrders.forEach((i) => {
+    if (i.finished === true) {
+      return;
+    }
 
-  existingOrders.forEach(i => {
-    const uid = `${i.name}-${i.tel}`;
-    if(arr.includes(uid)) return;
+// Chceck to see if there is a time set onto the order
+    if (typeof i.time !== "undefined") {
+      addToProcessedOrders(i, uniqueId);
+      uniqueId++;
+      return;
+    }
 
-    arr.push(uid);
     uniqueId++;
     createRequestElement(i, uniqueId);
-
-  })
+  });
 };
 
 /*********** PENDING ORDER REQUESTS **********/
@@ -39,18 +54,19 @@ const createRequestElement = function (orderObj, id) {
 
   const markup = `
     <section id="${id}-order-request-container" class="new-order-request">
-        <header>
+        <header class="request-text">
           <h3>${name}</h3>
           <h3>${orderTime}</h3>
         </header>
         <ul style="list-style: none;" class="request-text">
           ${meals}
         </ul>
-        <label>Additional comments</label>
-        <p>${customRequest}</p>
-        <form class="timeEstimate">
+        <label class="request-text">Additional comments</label>
+        <p class="request-text">${customRequest}</p>
+        <form class="timeEstimate request-text">
           <label for="timeEstimate">How much time will this order take?</label>
           <input id="${id}-input" name="timeEstimate" placeholder="Enter Time Estimate"></input>
+          <span class="error">Please enter a valid time</span>
           <button id="${id}-btn" class="btn-submit" type="button">Confirm Request</button>
         </form>
       </section>`;
@@ -58,25 +74,32 @@ const createRequestElement = function (orderObj, id) {
   $("#pending-requests-container").append(markup);
 
   $(`#${id}-btn`).click(function (e) {
-    if ($(`#${id}-input`).val().length === 0) return;
+
+    if ($(`#${id}-input`).val().length === 0 || isNaN($(`#${id}-input`).val())) {
+      alert('Please enter a valid time.');
+      return;
+    }
+
     addToProcessedOrders(orderObj, id);
     $("#initial-order").slideUp();
     $("#order-estimate").slideDown();
-    ($(`#${id}-order-request-container`)).hide(100);
+    $(`#${id}-order-request-container`).hide(100);
 
-    socket.emit('time', $(`#${id}-input`).val());
-    $.post('/sms/orderTime', {time: $(`#${id}-input`).val()})
+    // Set time to the current order
+    orderObj.time = $(`#${id}-input`).val();
+    localStorage.setItem("orderList", JSON.stringify(existingOrders));
+    socket.emit("time", $(`#${id}-input`).val());
+    $.post("/sms/orderTime", { time: $(`#${id}-input`).val() });
   });
 };
 
-
 /*********** ORDER REQUESTS **********/
 const addToProcessedOrders = (orderObj, id) => {
-  const name = orderObj.name; //good
+  const name = orderObj.name;
   const customRequest = orderObj.message;
   const meals = mealList(orderObj.order);
   const markup = `
-    <section id="${id}-order-confirmed-container" class="new-order-request">
+    <section id="${id}-order-confirmed-container" class="current-order grow">
       <header>
         <h3>${name}</h3>
         <h3>${orderTime}</h3>
@@ -91,17 +114,27 @@ const addToProcessedOrders = (orderObj, id) => {
           <button id="${id}-btn-confirm" class="btn-submit" type="button">Order Complete</button>
 
         </form>
-      </section>`;
+      <div>
+        <hr class="underline" />
+      </div>
+    </section>`;
 
-      $("#current-orders-container").append(markup);
+  $("#current-orders-container").append(markup);
 
-      $(`#${id}-btn-confirm`).click(function (e) {
-        ($(`#${id}-order-confirmed-container`)).hide(100);
+  $(`#${id}-btn-confirm`).click(function (e) {
+    $(`#${id}-order-confirmed-container`).hide(100);
 
-        socket.emit('complete', 'awesome!');
-        $.get('/sms/completed');
-      });
-}
+
+    // Set order status as finished for the current object
+    orderObj.finished = true;
+    localStorage.setItem("orderList", JSON.stringify(existingOrders));
+
+
+
+    socket.emit("complete", "awesome!");
+    $.get("/sms/completed");
+  });
+};
 
 //Returns HTML markup of meal and quantity list passed in an object (used for pending orders and processed orders)
 const mealList = function (mealObj) {
@@ -114,8 +147,6 @@ const mealList = function (mealObj) {
   return string;
 };
 
-
-
 // appendOrderHistory(userOrder);
 
 $(document).ready(function (event) {
@@ -124,12 +155,17 @@ $(document).ready(function (event) {
 
   // Add individual new orders whenever cart is submitted
 
-  socket.on('sentNewOrder', () => {
+  socket.on("sentNewOrder", () => {
+
     uniqueId++;
+
     const newOrder = JSON.parse(localStorage.getItem("userOrder"));
+    existingOrders.push(newOrder);
+    localStorage.setItem("orderList", JSON.stringify(existingOrders));
     createRequestElement(newOrder, uniqueId);
+
   });
+
+  // if()
+
 });
-
-
-
