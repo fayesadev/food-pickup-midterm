@@ -44,7 +44,23 @@ module.exports = (db) => {
         console.log("order data is", order);
         return order;
       });
+  };
 
+  const mealOrderConnector = (qty, mealId, orderId) => {
+    const queryStr = `
+     INSERT INTO order_meals (order_id, meal_id, meal_quantity)
+     VALUES ($1, $2, $3)
+     RETURNING *;
+     `;
+
+    const queryValues = [qty, mealId, orderId];
+
+    return db.query(queryStr, queryValues)
+      .then((data) => {
+        const joinRow = data.rows[0];
+        console.log("joinRow data is", joinRow);
+        return joinRow;
+      });
   };
 
 
@@ -65,7 +81,7 @@ module.exports = (db) => {
         .then((mealData) => {
           const meal = mealData.rows[0];
 
-          console.log('meal:', meal);
+          mealOrderConnector(mealQuantity, meal.id, orderId);
         });
     });
 
