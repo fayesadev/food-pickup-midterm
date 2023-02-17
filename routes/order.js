@@ -13,33 +13,77 @@ module.exports = (db) => {
   //       res.send("test route");
   //     });
   // });
-
-  router.post('/', (req, res) => {
-    console.log(req.body);
+  const createCustomer = (nameOfCustomer, num) => {
     const customerQueryStr = `
-    INSERT INTO customers (name, phone_number, is_owner)
-    VALUES ($1, $2, FALSE);
+    INSERT INTO customers (name, phone_number)
+    VALUES ($1, $2)
+    RETURNING *;
     `;
-    const customerQueryValues = [];
+    const customerQueryValues = [nameOfCustomer, num];
 
-    db.query(customerQueryStr, customerQueryValues)
+    return db.query(customerQueryStr, customerQueryValues)
       .then((customerData) => {
-        console.log("data is", customerData);
-      })
-      .catch((err) => {
-        console.log(err);
+        const customer = customerData.rows[0];
+        console.log("customer data is", customer);
+        return customer;
+      });
+  };
+
+  const createOrder = (customerId, specialinstructions) => {
+    const orderQueryStr = `
+     INSERT INTO orders (customer_id, is_fulfilled, special_instructions)
+     VALUES ($1, FALSE, $2)
+     RETURNING *;
+     `;
+
+    const orderQueryValues = [customerId, specialinstructions];
+
+    return db.query(orderQueryStr, orderQueryValues)
+      .then((orderData) => {
+        const order = orderData.rows[0];
+        console.log("order data is", order);
+        return order;
       });
 
+  };
 
-      // const orderQueryStr = `
-      // INSERT INTO orders (customer_id, est_completion_time, is_fulfilled, special_instructions)
-      // VALUES ($1, $2, FALSE, $3);
-      // `;
-      // const orderQueryValues = [];
-      // db.query(orderQueryStr, orderQueryValues).then((data) => {
-      //   console.log("data is", data.order);
 
-      // })
+  const createOrderMeals = (orderId, orderObj) => {
+    Object.values(orderObj).forEach(mealObj => {
+      const mealName = mealObj.name;
+      const mealQuantity = mealObj.qty;
+      const mealPrice = mealObj.price;
+      const mealQueryStr = `
+        INSERT INTO meals (name, price)
+        VALUES ($1, $2)
+        RETURNING *;
+     `;
+
+      const mealQueryValues = [mealName, mealPrice];
+
+      db.query(mealQueryStr, mealQueryValues)
+        .then((mealData) => {
+          const meal = mealData.rows[0];
+
+          console.log('meal:', meal);
+        });
+    });
+
+  };
+
+
+  router.post('/', (req, res) => {
+    console.log('body:', req.body);
+    createCustomer(req.body.name, req.body.tel)
+      .then((customer) => {
+        createOrder(customer.id, req.body.message)
+          .then((order) => {
+            createOrderMeals(order.id, req.body.order);
+          });
+      })
+      .catch((err) => {
+        console.log("customer creation failed:", err);
+      });
 
 
     return res.send("data posted");
