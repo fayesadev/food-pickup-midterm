@@ -65,7 +65,7 @@ const createRatingElement = function (rating) {
 
 function submitReview() {
   const reviewThanks = $(`
-  <h3 class="pickup-alert">Thanks for rating our food! <br>Hope to see you again :)</h3>
+  <h3 class="pickup-alert">Thanks for rating our food! <br>Hope to see you again.</h3>
   <a class="home-button button" style="width: 180px;" href="/">Order Again</a>
   `);
   $("#order-review").empty();
@@ -95,7 +95,7 @@ $(function () {
 
   $("#review").click(function () {
     const reviewForm = $(`
-      <h3 class="review-title">Rate your experience</h3>
+      <h3 class="pickup-alert">Rate your experience</h3>
       <article class="review-page"></article>
     `);
 
