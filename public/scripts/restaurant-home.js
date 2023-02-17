@@ -22,16 +22,20 @@ const appendOrders = () => {
     if (exists === false) {
       existingOrders.push(userOrder);
       localStorage.setItem("orderList", JSON.stringify(existingOrders));
+      localStorage.removeItem("userOrder");
     }
   }
 
-  let arr = [];
+
 
   existingOrders.forEach((i) => {
-    const uid = `${i.name}-${i.tel}`;
-    if (arr.includes(uid)) return;
+    
 
-    arr.push(uid);
+if (typeof i.time !== 'undefined') {
+  addToProcessedOrders(i, uniqueId);
+  uniqueId++;
+  return;
+}
     uniqueId++;
     createRequestElement(i, uniqueId);
   });
@@ -71,7 +75,7 @@ const createRequestElement = function (orderObj, id) {
     $("#order-estimate").slideDown();
     $(`#${id}-order-request-container`).hide(100);
     orderObj.time = $(`#${id}-input`).val();
-    console.log(orderObj);
+    localStorage.setItem("orderList", JSON.stringify(existingOrders));
     socket.emit("time", $(`#${id}-input`).val());
     $.post("/sms/orderTime", { time: $(`#${id}-input`).val() });
   });
@@ -79,7 +83,7 @@ const createRequestElement = function (orderObj, id) {
 
 /*********** ORDER REQUESTS **********/
 const addToProcessedOrders = (orderObj, id) => {
-  const name = orderObj.name; //good
+  const name = orderObj.name; 
   const customRequest = orderObj.message;
   const meals = mealList(orderObj.order);
   const markup = `
@@ -104,7 +108,14 @@ const addToProcessedOrders = (orderObj, id) => {
 
   $(`#${id}-btn-confirm`).click(function (e) {
     $(`#${id}-order-confirmed-container`).hide(100);
-
+    existingOrders.forEach((order, idx) => {
+      const uid = `${order.name}-${order.tel}`;
+      const orderObjId = `${orderObj.name}-${orderObj.tel}`;
+      if (uid === orderObjId) {
+        existingOrders.splice(idx,1);
+        localStorage.setItem("orderList", JSON.stringify(existingOrders));
+      }
+    });
     socket.emit("complete", "awesome!");
     $.get("/sms/completed");
   });
@@ -126,12 +137,16 @@ const mealList = function (mealObj) {
 $(document).ready(function (event) {
   // Add all existing orders on page load
   appendOrders();
-
+  
   // Add individual new orders whenever cart is submitted
-
+  
   socket.on("sentNewOrder", () => {
     uniqueId++;
+    
     const newOrder = JSON.parse(localStorage.getItem("userOrder"));
+    existingOrders.push(newOrder);
+    localStorage.setItem("orderList", JSON.stringify(existingOrders));
     createRequestElement(newOrder, uniqueId);
+    localStorage.removeItem("userOrder");
   });
 });
