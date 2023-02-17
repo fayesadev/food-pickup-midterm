@@ -1,8 +1,19 @@
-nav span {
+nav {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  font-weight: 600;
+  font-size: 1.5em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 1%;
+  height: 56px;
+  z-index: 100;
+  /* background-color: ; */
+  color: #FFF;
+  /* color: #bc4b30; */
   font-family: 'Special Elite', cursive;
-  color: rgb(51,51,51);
-  // color:#FFF;
-  position: relative;
 }
 
 main {
@@ -13,7 +24,7 @@ main {
   height: auto;
   color: #313131;
   // background-color: rgb(242, 242, 242);
-  background-color: #78a5b4;
+  background-color: #4e7077;
   // background-image: url('https://media.tenor.com/Qfv0M5yI6toAAAAC/wings-chicken-wings.gif');
 }
 

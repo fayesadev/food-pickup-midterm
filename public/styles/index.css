@@ -84,6 +84,7 @@ img {
 
 .section-heading {
   font-family: 'Special Elite', cursive;
+  margin-top: 50px;
 }
 
 .section-heading span {
@@ -103,13 +104,12 @@ img {
   margin-top: 80px;
   margin-left: 50px;
   color:#313131;
-  /* font-family: 'Special Elite', cursive; */
+  letter-spacing: 2px;
   font-family: 'Bebas Neue', cursive;
   font-weight: 700;
 }
 
 .grid-container {
-  /* margin-left: 20px; */
   display: grid;
   position: relative;
   grid-template-columns: repeat( auto-fit, minmax(350px,1fr));
@@ -117,11 +117,6 @@ img {
   padding: 0;
   margin-left: 30px;
   margin-right: 30px;
-  /* grid-template-columns: 20vw 20vw 20vw; */
-  /* grid-template-rows: 25vw 25vw 25vw; */
-  /* grid-auto-rows: 23vw;
-  row-gap: 1rem;
-  column-gap: 1rem; */
 }
 
 .meal{
@@ -144,19 +139,7 @@ img {
   z-index: 1;
 }
 
-/* .meal {
-  padding: 1rem;
-  font-size: 15px;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-} */
-/* Get rid of texas monthlys 1 Bbq brisket */
+
 .meal-header {
   display: flex;
   flex-direction: column;
@@ -169,26 +152,21 @@ img {
 }
 
 .meal-image {
-  /* height: auto;
-  width: 80%;
-  object-fit: fill;
-  max-height: auto; */
-
   position: relative;
   width: 100%;
-  /* min-width: 100%; */
+  min-width: 100%;
   object-fit: fill;
-  /* z-index: 1; */
   border-radius: 15px 15px 0 0;
 }
 
 .meal-footer {
+  height: 70px;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
   padding: 10px 20px;
-  margin-bottom: 10px;
+  padding-bottom: 10px;
   font-size: 18px;
 }
 
@@ -207,7 +185,7 @@ img {
 }
 
 .addtocart:hover {
-  background-color: #e55e3d;
+  background-color: #a54128;
 }
 
 .fa-cart-plus {
@@ -346,7 +324,7 @@ cart-column {
 .btn-checkout:hover,
 .btn-checkout:focus {
   /* background-color: #62897e */
-  background-color: #78a5b4;
+  background-color: #3c585f;
 }
 
 .btn-danger {
@@ -472,14 +450,18 @@ label.order-label {
 
 .cancel {
   margin-right: .5em;
-  background-color: #D3D3D3;
+  background-color: #939393;
   font-weight: 400;
 }
 
 .confirm {
   margin-left: .5em;
-  background-color:#c55336;
+  background-color:#bc4b30;
   font-weight: 400;
+}
+
+.confirm:hover {
+  background-color: #903822;
 }
 
 .underline {
