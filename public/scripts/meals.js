@@ -60,7 +60,7 @@ const createMealItem = (meal, foodCategory) => {
 
   //  ----- Update ejs template ----- //
   const mealItem = $(`
-    <article class="meal">
+    <article class="meal grow">
       <header class="meal-header">
       <div><img class="meal-image" src="${meal.img}"></div>
       <div class="meal-name"><strong>${mealName}</strong></div>

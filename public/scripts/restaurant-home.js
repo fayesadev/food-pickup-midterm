@@ -2,7 +2,7 @@
 
 const userOrder = JSON.parse(localStorage.getItem("userOrder"));
 const d = new Date();
-const orderTime = d.toString();
+const orderTime = d.toLocaleTimeString();
 const socket = io();
 let uniqueId = 0;
 
@@ -53,18 +53,19 @@ const createRequestElement = function (orderObj, id) {
 
   const markup = `
     <section id="${id}-order-request-container" class="new-order-request">
-        <header>
+        <header class="request-text">
           <h3>${name}</h3>
           <h3>${orderTime}</h3>
         </header>
         <ul style="list-style: none;" class="request-text">
           ${meals}
         </ul>
-        <label>Additional comments</label>
-        <p>${customRequest}</p>
-        <form class="timeEstimate">
+        <label class="request-text">Additional comments</label>
+        <p class="request-text">${customRequest}</p>
+        <form class="timeEstimate request-text">
           <label for="timeEstimate">How much time will this order take?</label>
           <input id="${id}-input" name="timeEstimate" placeholder="Enter Time Estimate"></input>
+          <span class="error">Please enter a valid time</span>
           <button id="${id}-btn" class="btn-submit" type="button">Confirm Request</button>
         </form>
       </section>`;
@@ -72,7 +73,10 @@ const createRequestElement = function (orderObj, id) {
   $("#pending-requests-container").append(markup);
 
   $(`#${id}-btn`).click(function (e) {
-    if ($(`#${id}-input`).val().length === 0) return;
+    if ($(`#${id}-input`).val().length === 0 || isNaN($(`#${id}-input`).val())) {
+      alert('Please enter a valid time.');
+      return;
+    }
     addToProcessedOrders(orderObj, id);
     $("#initial-order").slideUp();
     $("#order-estimate").slideDown();
@@ -92,7 +96,7 @@ const addToProcessedOrders = (orderObj, id) => {
   const customRequest = orderObj.message;
   const meals = mealList(orderObj.order);
   const markup = `
-    <section id="${id}-order-confirmed-container" class="new-order-request">
+    <section id="${id}-order-confirmed-container" class="current-order grow">
       <header>
         <h3>${name}</h3>
         <h3>${orderTime}</h3>
@@ -107,7 +111,10 @@ const addToProcessedOrders = (orderObj, id) => {
           <button id="${id}-btn-confirm" class="btn-submit" type="button">Order Complete</button>
 
         </form>
-      </section>`;
+      <div>
+        <hr class="underline" />
+      </div>
+    </section>`;
 
   $("#current-orders-container").append(markup);
 
@@ -118,7 +125,7 @@ const addToProcessedOrders = (orderObj, id) => {
     orderObj.finished = true;
     localStorage.setItem("orderList", JSON.stringify(existingOrders));
 
-   
+
     socket.emit("complete", "awesome!");
     $.get("/sms/completed");
   });
@@ -149,6 +156,9 @@ $(document).ready(function (event) {
     existingOrders.push(newOrder);
     localStorage.setItem("orderList", JSON.stringify(existingOrders));
     createRequestElement(newOrder, uniqueId);
-  
+
   });
+
+  // if()
+
 });

@@ -101,6 +101,7 @@ img {
 .food-category {
   font-size: 50px;
   margin-top: 80px;
+  margin-left: 50px;
   color:#313131;
   /* font-family: 'Special Elite', cursive; */
   font-family: 'Bebas Neue', cursive;
@@ -114,7 +115,8 @@ img {
   grid-template-columns: repeat( auto-fit, minmax(350px,1fr));
   grid-gap: 20px 40px;
   padding: 0;
-
+  margin-left: 30px;
+  margin-right: 30px;
   /* grid-template-columns: 20vw 20vw 20vw; */
   /* grid-template-rows: 25vw 25vw 25vw; */
   /* grid-auto-rows: 23vw;
@@ -130,6 +132,16 @@ img {
   box-shadow: 0 0 15px rgba(0,0,0,0.1);
   background-color: rgb(243, 243, 243);
   margin: 0 20px;
+}
+
+.grow {
+  transition: all .2s ease-in-out;
+}
+
+.grow:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 5px 3px rgba(0,0,0,.2);
+  z-index: 1;
 }
 
 /* .meal {
@@ -219,7 +231,8 @@ img {
   min-height: 75vh;
   color: rgb(51,51,51);
   font-size: 18px;
-  background-color: #eae9e9;
+  /* background-color: #eae9e9; */
+  background-color: #00000000;
   border-radius: 10px;
   padding: 2em;
   margin-left: auto;

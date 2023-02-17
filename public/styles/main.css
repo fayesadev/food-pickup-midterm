@@ -385,6 +385,7 @@ body {
   width: 100%;
   margin: 0;
   padding: 0;
+  padding-bottom: 10vh;
   /* color: #FFF; */
   color:#243035;
   background-color: rgb(237, 237, 237);
