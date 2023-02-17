@@ -10,9 +10,7 @@ nav {
   padding: 20px 1%;
   height: 56px;
   z-index: 100;
-  /* background-color: ; */
   color: #FFF;
-  /* color: #bc4b30; */
   font-family: 'Special Elite', cursive;
 }
 .logo-image {
@@ -45,7 +43,6 @@ img {
   height: 50vh;
 
   background: url('/images/ezgif.com-video-to-gif.gif');
-  /* background: url(/images/cover-photo.png) rgba(33, 19, 13, 0.3); */
   background-repeat: no-repeat;
   background-blend-mode: multiply;
   background-position: center center;
@@ -53,11 +50,8 @@ img {
 
   font-size: 4rem;
   font-family: 'Bebas Neue', cursive;
-  /* font-family: 'Arvo', serif; */
-  /* font-weight: 600; */
   letter-spacing: 1px;
   color:#ffffff;
-  /* color:#f2c349; */
   display: flex;
   align-items: center;
   justify-content: center;
