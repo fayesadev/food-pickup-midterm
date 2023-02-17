@@ -6,7 +6,7 @@ nav {
   font-size: 1.5em;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: left;
   padding: 20px 1%;
   height: 56px;
   z-index: 100;
@@ -15,7 +15,11 @@ nav {
   /* color: #bc4b30; */
   font-family: 'Special Elite', cursive;
 }
-
+.logo-image {
+  margin-top: 3px;
+  
+  width: 70px;
+}
 #see-order {
   display: none;
 }
