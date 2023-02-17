@@ -10,6 +10,7 @@ let uniqueId = 0;
 const existingOrders = JSON.parse(localStorage.getItem("orderList")) || [];
 
 const appendOrders = () => {
+  // Check to see if userOrder is null AND it doesn't exist in existingOrders already
   let exists = false;
   if (userOrder !== null) {
     existingOrders.forEach((order) => {
@@ -22,20 +23,22 @@ const appendOrders = () => {
     if (exists === false) {
       existingOrders.push(userOrder);
       localStorage.setItem("orderList", JSON.stringify(existingOrders));
-      localStorage.removeItem("userOrder");
     }
   }
 
-
-
+// Chcek to see if the existing order has already been completed
   existingOrders.forEach((i) => {
-    
+    if (i.finished === true) {
+      return;
+    }
 
-if (typeof i.time !== 'undefined') {
-  addToProcessedOrders(i, uniqueId);
-  uniqueId++;
-  return;
-}
+// Chceck to see if there is a time set onto the order
+    if (typeof i.time !== "undefined") {
+      addToProcessedOrders(i, uniqueId);
+      uniqueId++;
+      return;
+    }
+
     uniqueId++;
     createRequestElement(i, uniqueId);
   });
@@ -74,6 +77,8 @@ const createRequestElement = function (orderObj, id) {
     $("#initial-order").slideUp();
     $("#order-estimate").slideDown();
     $(`#${id}-order-request-container`).hide(100);
+
+    // Set time to the current order
     orderObj.time = $(`#${id}-input`).val();
     localStorage.setItem("orderList", JSON.stringify(existingOrders));
     socket.emit("time", $(`#${id}-input`).val());
@@ -83,7 +88,7 @@ const createRequestElement = function (orderObj, id) {
 
 /*********** ORDER REQUESTS **********/
 const addToProcessedOrders = (orderObj, id) => {
-  const name = orderObj.name; 
+  const name = orderObj.name;
   const customRequest = orderObj.message;
   const meals = mealList(orderObj.order);
   const markup = `
@@ -108,14 +113,12 @@ const addToProcessedOrders = (orderObj, id) => {
 
   $(`#${id}-btn-confirm`).click(function (e) {
     $(`#${id}-order-confirmed-container`).hide(100);
-    existingOrders.forEach((order, idx) => {
-      const uid = `${order.name}-${order.tel}`;
-      const orderObjId = `${orderObj.name}-${orderObj.tel}`;
-      if (uid === orderObjId) {
-        existingOrders.splice(idx,1);
-        localStorage.setItem("orderList", JSON.stringify(existingOrders));
-      }
-    });
+
+    // Set order status as finished for the current object
+    orderObj.finished = true;
+    localStorage.setItem("orderList", JSON.stringify(existingOrders));
+
+   
     socket.emit("complete", "awesome!");
     $.get("/sms/completed");
   });
@@ -137,16 +140,15 @@ const mealList = function (mealObj) {
 $(document).ready(function (event) {
   // Add all existing orders on page load
   appendOrders();
-  
+
   // Add individual new orders whenever cart is submitted
-  
   socket.on("sentNewOrder", () => {
     uniqueId++;
-    
+
     const newOrder = JSON.parse(localStorage.getItem("userOrder"));
     existingOrders.push(newOrder);
     localStorage.setItem("orderList", JSON.stringify(existingOrders));
     createRequestElement(newOrder, uniqueId);
-    localStorage.removeItem("userOrder");
+  
   });
 });
