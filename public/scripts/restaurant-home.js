@@ -8,6 +8,7 @@ let uniqueId = 0;
 
 /********** APPEND ORDER REQUESTS **********/
 const existingOrders = JSON.parse(localStorage.getItem("orderList")) || [];
+console.log('existingOrders', existingOrders);
 
 const appendOrders = () => {
   // Check to see if userOrder is null AND it doesn't exist in existingOrders already
@@ -76,10 +77,12 @@ const createRequestElement = function (orderObj, id) {
   $("#pending-requests-container").append(markup);
 
   $(`#${id}-btn`).click(function (e) {
+
     if ($(`#${id}-input`).val().length === 0 || isNaN($(`#${id}-input`).val())) {
       alert('Please enter a valid time.');
       return;
     }
+
     addToProcessedOrders(orderObj, id);
     $("#initial-order").slideUp();
     $("#order-estimate").slideDown();
@@ -124,9 +127,11 @@ const addToProcessedOrders = (orderObj, id) => {
   $(`#${id}-btn-confirm`).click(function (e) {
     $(`#${id}-order-confirmed-container`).hide(100);
 
+
     // Set order status as finished for the current object
     orderObj.finished = true;
     localStorage.setItem("orderList", JSON.stringify(existingOrders));
+
 
 
     socket.emit("complete", "awesome!");
@@ -152,7 +157,9 @@ $(document).ready(function (event) {
   appendOrders();
 
   // Add individual new orders whenever cart is submitted
+
   socket.on("sentNewOrder", () => {
+
     uniqueId++;
 
     const newOrder = JSON.parse(localStorage.getItem("userOrder"));

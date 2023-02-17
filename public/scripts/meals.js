@@ -231,14 +231,10 @@ $('.confirm').click(function() {
 
   localStorage.setItem("userOrder", JSON.stringify(userOrder));
 
-  // send query to API
-  // data includes userOrder object
-  // conditional if success
-  // catch error and send alert
-  // $.post('/orderDb', data, function (res) {
-  //   console.log(data);
-  //   const order = JSON.parse(localStorage.getItem('order'));
-  // })
+
+  $.post('/order', userOrder, function(res) {
+    console.log("db res is:", res);
+  });
 
   $.get('/sms/placed')
   socket.emit('newOrder', 'awesome!');
