@@ -13,7 +13,7 @@ CREATE TABLE orders (
   id SERIAL PRIMARY KEY NOT NULL,
   customer_id INTEGER REFERENCES customers(id) ON DELETE CASCADE,
   est_completion_time SMALLINT,
-  order_time TIMESTAMP,
+  order_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   is_fulfilled BOOLEAN NOT NULL DEFAULT FALSE,
   special_instructions TEXT
 );
@@ -21,8 +21,7 @@ CREATE TABLE orders (
 CREATE TABLE meals (
   id SERIAL PRIMARY KEY NOT NULL,
   name VARCHAR(255) NOT NULL,
-  thumbnail_photo_url VARCHAR(255) NOT NULL
-  
+  price FLOAT NOT NULL DEFAULT 0
 );
 
 CREATE TABLE order_meals (
