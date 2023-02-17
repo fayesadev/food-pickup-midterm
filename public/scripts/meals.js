@@ -113,6 +113,7 @@ const createCartElement = (id) => {
           <input class="cart-col-3-input" id="update-cart-${order[id].id}" type="number" value="1" min="0" max="99">
           <button class="btn btn-danger" id="remove-cart-${order[id].id}" type="button">x</button>
         </div>
+      </div>
       `
   );
 
