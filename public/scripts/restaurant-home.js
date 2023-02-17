@@ -6,27 +6,35 @@ const orderTime = d.toString();
 const socket = io();
 let uniqueId = 0;
 
-
 /********** APPEND ORDER REQUESTS **********/
 const existingOrders = JSON.parse(localStorage.getItem("orderList")) || [];
 
 const appendOrders = () => {
+  let exists = false;
   if (userOrder !== null) {
-    existingOrders.push(userOrder);
+    existingOrders.forEach((order) => {
+      const uid = `${order.name}-${order.tel}`;
+      const userOrderId = `${userOrder.name}-${userOrder.tel}`;
+      if (uid === userOrderId) {
+        exists = true;
+      }
+    });
+    if (exists === false) {
+      existingOrders.push(userOrder);
+      localStorage.setItem("orderList", JSON.stringify(existingOrders));
+    }
   }
-  localStorage.setItem("orderList", JSON.stringify(existingOrders));
 
   let arr = [];
 
-  existingOrders.forEach(i => {
+  existingOrders.forEach((i) => {
     const uid = `${i.name}-${i.tel}`;
-    if(arr.includes(uid)) return;
+    if (arr.includes(uid)) return;
 
     arr.push(uid);
     uniqueId++;
     createRequestElement(i, uniqueId);
-
-  })
+  });
 };
 
 /*********** PENDING ORDER REQUESTS **********/
@@ -58,16 +66,16 @@ const createRequestElement = function (orderObj, id) {
 
   $(`#${id}-btn`).click(function (e) {
     if ($(`#${id}-input`).val().length === 0) return;
-    addToProcessedOrders(orderObj, id); 
+    addToProcessedOrders(orderObj, id);
     $("#initial-order").slideUp();
     $("#order-estimate").slideDown();
-    ($(`#${id}-order-request-container`)).hide(100);
-
-    socket.emit('time', $(`#${id}-input`).val());
-    $.post('/sms/orderTime', {time: $(`#${id}-input`).val()})
+    $(`#${id}-order-request-container`).hide(100);
+    orderObj.time = $(`#${id}-input`).val();
+    console.log(orderObj);
+    socket.emit("time", $(`#${id}-input`).val());
+    $.post("/sms/orderTime", { time: $(`#${id}-input`).val() });
   });
 };
-
 
 /*********** ORDER REQUESTS **********/
 const addToProcessedOrders = (orderObj, id) => {
@@ -92,15 +100,15 @@ const addToProcessedOrders = (orderObj, id) => {
         </form>
       </section>`;
 
-      $("#current-orders-container").append(markup);
-      
-      $(`#${id}-btn-confirm`).click(function (e) {
-        ($(`#${id}-order-confirmed-container`)).hide(100);
+  $("#current-orders-container").append(markup);
 
-        socket.emit('complete', 'awesome!');
-        $.get('/sms/completed');
-      });
-}
+  $(`#${id}-btn-confirm`).click(function (e) {
+    $(`#${id}-order-confirmed-container`).hide(100);
+
+    socket.emit("complete", "awesome!");
+    $.get("/sms/completed");
+  });
+};
 
 //Returns HTML markup of meal and quantity list passed in an object (used for pending orders and processed orders)
 const mealList = function (mealObj) {
@@ -113,8 +121,6 @@ const mealList = function (mealObj) {
   return string;
 };
 
-
-
 // appendOrderHistory(userOrder);
 
 $(document).ready(function (event) {
@@ -122,13 +128,10 @@ $(document).ready(function (event) {
   appendOrders();
 
   // Add individual new orders whenever cart is submitted
-  
-  socket.on('sentNewOrder', () => {
+
+  socket.on("sentNewOrder", () => {
     uniqueId++;
     const newOrder = JSON.parse(localStorage.getItem("userOrder"));
     createRequestElement(newOrder, uniqueId);
   });
 });
-
-
-
