@@ -6,7 +6,7 @@ nav {
   font-size: 1.5em;
   display: flex;
   align-items: center;
-  justify-content: flex;
+  justify-content: space-between;
   padding: 20px 1%;
   height: 56px;
   z-index: 100;
