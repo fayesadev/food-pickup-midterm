@@ -9,6 +9,7 @@ let uniqueId = 0;
 
 /********** APPEND ORDER REQUESTS **********/
 const existingOrders = JSON.parse(localStorage.getItem("orderList")) || [];
+console.log('existingOrders', existingOrders);
 
 const appendOrders = () => {
   if (userOrder !== null) {
@@ -58,7 +59,7 @@ const createRequestElement = function (orderObj, id) {
 
   $(`#${id}-btn`).click(function (e) {
     if ($(`#${id}-input`).val().length === 0) return;
-    addToProcessedOrders(orderObj, id); 
+    addToProcessedOrders(orderObj, id);
     $("#initial-order").slideUp();
     $("#order-estimate").slideDown();
     ($(`#${id}-order-request-container`)).hide(100);
@@ -93,7 +94,7 @@ const addToProcessedOrders = (orderObj, id) => {
       </section>`;
 
       $("#current-orders-container").append(markup);
-      
+
       $(`#${id}-btn-confirm`).click(function (e) {
         ($(`#${id}-order-confirmed-container`)).hide(100);
 
@@ -122,7 +123,7 @@ $(document).ready(function (event) {
   appendOrders();
 
   // Add individual new orders whenever cart is submitted
-  
+
   socket.on('sentNewOrder', () => {
     uniqueId++;
     const newOrder = JSON.parse(localStorage.getItem("userOrder"));
