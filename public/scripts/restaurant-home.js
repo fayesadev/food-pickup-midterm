@@ -68,6 +68,9 @@ const createRequestElement = function (orderObj, id) {
           <span class="error">Please enter a valid time</span>
           <button id="${id}-btn" class="btn-submit" type="button">Confirm Request</button>
         </form>
+        <div>
+        <hr class="underline" />
+      </div>
       </section>`;
 
   $("#pending-requests-container").append(markup);

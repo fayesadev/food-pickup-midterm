@@ -56,6 +56,16 @@ main {
   flex-direction: column;
 }
 
+.new-order-request hr {
+  padding: 0;
+  margin-top: 40px;
+  height: 3px;
+  width: 30em;
+  background-color: #9696967c;
+  border: none;
+  border-radius: 10px;
+}
+
 .new-order-request:hover {
   background-color: #ececec;
   width: 100%;
