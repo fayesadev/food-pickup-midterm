@@ -1,4 +1,4 @@
-nav {
+.restaurant-nav {
   position: absolute;
   top: 0;
   width: 100%;
@@ -6,14 +6,18 @@ nav {
   font-size: 1.5em;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: left;
   padding: 20px 1%;
   height: 56px;
   z-index: 100;
-  /* background-color: ; */
   color: #FFF;
-  /* color: #bc4b30; */
   font-family: 'Special Elite', cursive;
+}
+
+.logo-image {
+  margin-top: 3px;
+
+  width: 70px;
 }
 
 main {
@@ -23,9 +27,7 @@ main {
   font-family: 'Roboto', sans-serif;
   height: auto;
   color: #313131;
-  // background-color: rgb(242, 242, 242);
   background-color: #4e7077;
-  // background-image: url('https://media.tenor.com/Qfv0M5yI6toAAAAC/wings-chicken-wings.gif');
 }
 
 .requests h1 {
@@ -49,9 +51,6 @@ main {
   box-shadow: 0 4px 5px 3px rgba(0,0,0,.2);
   border-radius: 10px;
   margin: 1em;
-
-  // padding-left: 2em;
-  // padding-right: 2em;
 }
 
 .new-order-request {
@@ -62,7 +61,16 @@ main {
 
   display: flex;
   flex-direction: column;
-  // justify-content: space-around;
+}
+
+.new-order-request hr {
+  padding:0;
+  margin-top: 40px;
+  height: 3px;
+  width: 30em;
+  background-color: #9696967c;
+  border: none;
+  border-radius: 10px;
 }
 
 .new-order-request hr {
@@ -109,23 +117,15 @@ form input {
 
 button {
   width: 150px;
-
 }
 
 .orders {
   width: 70vw;
   height: 100vw;
-  // max-width: 600px;
-  // margin: 2em;
-  // padding: 2em;
-  // border-right: 1px solid;
   display: flex;
   flex-direction: column;
   align-items: center;
-  // background-color: rgb(242, 242, 242);
-
   max-width: 800px;
-  // padding: 2em;
 }
 
 .orders h1 {
@@ -142,14 +142,12 @@ button {
   border-radius: 25px;
   margin-bottom: 1.5em;
   padding: 2em;
-  // min-width: 400px;
   padding-bottom: 2em;
-  // border-bottom: 2px solid #3c2525;
-  // border-radius: 5%;
 }
 
 .grow {
-  transition: all .2s ease-in-out; }
+  transition: all .2s ease-in-out;
+}
 
 .grow:hover {
   transform: scale(1.1);
@@ -175,7 +173,6 @@ header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-
 }
 
 .btn-submit {
@@ -196,7 +193,6 @@ header {
   width: 100%;
   border-radius: 4px;
   border-style: none;
-  // background-color: #4b4e4c;
   color: white;
   background-color: #313131;
 }
