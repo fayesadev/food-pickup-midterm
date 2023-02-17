@@ -198,6 +198,7 @@ $('.btn-checkout').click(function() {
 
   //----- proceed to checkout if number of order items is > 0 -----//
   const form = $(`#confirmation-form`)[0];
+  $('.overlay').css("display", "block").fadeIn();
   $(form).show(100);
 });
 
@@ -208,6 +209,7 @@ $('.btn-checkout').click(function() {
 //
 $('.cancel').click(function() {
   const form = $(`#confirmation-form`)[0];
+  $('.overlay').css("display", "none").fadeOut();
   $(form).hide(100);
 });
 

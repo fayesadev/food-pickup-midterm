@@ -101,7 +101,7 @@ img {
 .food-category {
   font-size: 50px;
   margin-top: 80px;
-  color:#bc4b30;
+  color:#313131;
   /* font-family: 'Special Elite', cursive; */
   font-family: 'Bebas Neue', cursive;
   font-weight: 700;
@@ -166,7 +166,7 @@ img {
   width: 100%;
   /* min-width: 100%; */
   object-fit: fill;
-  z-index: 1;
+  /* z-index: 1; */
   border-radius: 15px 15px 0 0;
 }
 
@@ -204,6 +204,7 @@ img {
 
 .meal-name {
   font-size: 20px;
+  margin-top: 10px;
   margin-left: 10px;
   margin-right: 10px;
 }
@@ -371,19 +372,30 @@ main {
   align-items: center;
 }
 
+.overlay {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #00000075;
+  display: none;
+}
+
 #confirmation-form {
   display: none;
 }
+
 .order-form {
-  background-color: #dbbca0;
+  background-color: #f7f7f7;
   z-index: 100;
   position: fixed;
-  margin-left: auto;
-  margin-right: auto;
+  left: 25vw;
+  top: 25vw;
   margin-top: -22%;
-  padding: 20px;
+  padding: 2em;
   width: 50%;
-  height: 100%;
+  height: 90%;
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
   border-radius: 15px;
 }
@@ -395,7 +407,7 @@ main {
   line-height: 1.5;
   color: #212529;
   text-align: left;
-  background-color:#fbf3db;
+  background-color:#fafafa;
   padding: 30px;
   padding-bottom: 10px;
   border: 1px solid #ced4da;
@@ -418,7 +430,7 @@ main {
   padding: 0.375rem 0.75rem;
   line-height: 1.5;
   color: #495057;
-  background-color:#fbf3db;
+  background-color:#ffffff;
   border: 1px solid #ced4da;
   outline: none;
   border-radius: 0.25rem;
