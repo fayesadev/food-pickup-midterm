@@ -9,6 +9,10 @@ Tech Stack: Javascript, Node, Express, PostgreSQL, Web Sockets
 ## Screenshots
 
 !["Screenshot of Landing Page"](https://github.com/robbiekthomas/food-pickup-midterm/blob/master/public/images/meathub1.png?raw=true)
+!["Screenshot of Restaurant Side"](https://github.com/robbiekthomas/food-pickup-midterm/blob/master/public/images/meathub2.PNG?raw=true)
+!["Screenshot of Order Status"](https://github.com/robbiekthomas/food-pickup-midterm/blob/master/public/images/meathub3%20.PNG?raw=true)
+!["Screenshot of Loading Time"](https://github.com/robbiekthomas/food-pickup-midterm/blob/master/public/images/meathub4.png?raw=true)
+!["Screenshot of Reviews"](https://github.com/robbiekthomas/food-pickup-midterm/blob/master/public/images/meathub5.png?raw=true)
 
 ## Getting Started
 
