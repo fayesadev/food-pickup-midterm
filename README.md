@@ -4,7 +4,7 @@ Meat Hub - Restaurant Takeout App
 ## Project Description
 
 A restaurant takeout app that allows you to order food from a menu and track your order status. Also includes the restaurant side dashboard.
-Tech Stack: Javascript, Node, Express, PostgreSQL, Web Sockets
+Tech Stack: Javascript, SASS, jQuery, AJAX, Node, Express, PostgreSQL, Web Socket
 
 ## Screenshots
 
