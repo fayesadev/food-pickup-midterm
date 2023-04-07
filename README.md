@@ -1,4 +1,4 @@
-Meat Hub - Restaurant Takeout App
+MealHub - Restaurant Takeout App
 =========
 
 ## Project Description
